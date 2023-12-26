@@ -1,16 +1,12 @@
 package fr.esgi.service.impl;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
+import java.util.List;
+import java.util.Random;
 
 import fr.esgi.buisness.Mot;
 import fr.esgi.service.MotService;
@@ -18,106 +14,90 @@ import fr.esgi.service.MotService;
 public class MotServiceImpl implements MotService {
 
 	private static ArrayList<Mot> mots = new ArrayList<>();
+	private static Random random = new Random();
 
 	@Override
 	public void importerMot() {
 		try {
-			CSVRecord csvRecord = null;
-			@SuppressWarnings("deprecation")
+			// Utiliser URL pour lire un fichier depuis une URL
 			URL url = new URL("https://raw.githubusercontent.com/gverdier/motus/master/Console/Dictionnaire6.txt");
+			try (BufferedReader lecteur = new BufferedReader(new InputStreamReader(url.openStream()))) {
+				String ligne;
 
-			Reader reader = new InputStreamReader(new BufferedInputStream(url.openStream()));
-
-			CSVFormat csvFormat = CSVFormat.newFormat(',').builder().setHeader().setSkipHeaderRecord(true).build();
-
-			CSVParser csvParser = new CSVParser(reader, csvFormat);
-
-			while (csvParser.iterator().hasNext()) {
-
-				csvRecord = csvParser.iterator().next();
-				// On teste si la région est déjà présente dans l'ensemble des régions
-				Mot mot = recupererMot(csvRecord.get(0));
-				if (mot == null) {
-					ajouterMot(mot);
+				while ((ligne = lecteur.readLine()) != null) {
+					// Assurez-vous que recupererMot renvoie une instance de la classe Mot
+					Mot mot = recupererMot(ligne);
+					if (mot == null) {
+						mot = new Mot(ligne, ligne.length());
+						ajouterMot(mot);
+					}
 				}
-
 			}
-		} catch (
-
-		MalformedURLException e) {
-			System.exit(-1);
 		} catch (IOException e) {
-			System.exit(-1);
+			e.printStackTrace();
 		}
 		try {
-			CSVRecord csvRecord = null;
-			@SuppressWarnings("deprecation")
+			// Utiliser URL pour lire un fichier depuis une URL
 			URL url = new URL("https://raw.githubusercontent.com/gverdier/motus/master/Console/Dictionnaire7.txt");
+			try (BufferedReader lecteur = new BufferedReader(new InputStreamReader(url.openStream()))) {
+				String ligne;
 
-			Reader reader = new InputStreamReader(new BufferedInputStream(url.openStream()));
-
-			CSVFormat csvFormat = CSVFormat.newFormat(',').builder().setHeader().setSkipHeaderRecord(true).build();
-
-			CSVParser csvParser = new CSVParser(reader, csvFormat);
-
-			while (csvParser.iterator().hasNext()) {
-
-				csvRecord = csvParser.iterator().next();
-				// On teste si la région est déjà présente dans l'ensemble des régions
-				Mot mot = recupererMot(csvRecord.get(0));
-				if (mot == null) {
-					ajouterMot(mot);
+				while ((ligne = lecteur.readLine()) != null) {
+					// Assurez-vous que recupererMot renvoie une instance de la classe Mot
+					Mot mot = recupererMot(ligne);
+					if (mot == null) {
+						mot = new Mot(ligne, ligne.length());
+						ajouterMot(mot);
+					}
 				}
-
 			}
-		} catch (
-
-		MalformedURLException e) {
-			System.exit(-1);
 		} catch (IOException e) {
-			System.exit(-1);
+			e.printStackTrace();
 		}
 		try {
-			CSVRecord csvRecord = null;
-			@SuppressWarnings("deprecation")
+			// Utiliser URL pour lire un fichier depuis une URL
 			URL url = new URL("https://raw.githubusercontent.com/gverdier/motus/master/Console/Dictionnaire8.txt");
+			try (BufferedReader lecteur = new BufferedReader(new InputStreamReader(url.openStream()))) {
+				String ligne;
 
-			Reader reader = new InputStreamReader(new BufferedInputStream(url.openStream()));
-
-			CSVFormat csvFormat = CSVFormat.newFormat(',').builder().setHeader().setSkipHeaderRecord(true).build();
-
-			CSVParser csvParser = new CSVParser(reader, csvFormat);
-
-			while (csvParser.iterator().hasNext()) {
-
-				csvRecord = csvParser.iterator().next();
-				// On teste si la région est déjà présente dans l'ensemble des régions
-				Mot mot = recupererMot(csvRecord.get(0));
-				if (mot == null) {
-					ajouterMot(mot);
+				while ((ligne = lecteur.readLine()) != null) {
+					// Assurez-vous que recupererMot renvoie une instance de la classe Mot
+					Mot mot = recupererMot(ligne);
+					if (mot == null) {
+						mot = new Mot(ligne, ligne.length());
+						ajouterMot(mot);
+					}
 				}
-
 			}
-		} catch (
-
-		MalformedURLException e) {
-			System.exit(-1);
 		} catch (IOException e) {
-			System.exit(-1);
+			e.printStackTrace();
 		}
-
-		System.out.println("Nombre de mot : " + mots.size());
 	}
 
 	@Override
 	public Mot recupererMot(String nom) {
-		return mots.stream().filter(mot -> mot != null && mot.getMot().equals(nom)).findFirst().orElse(null);
+		return mots.stream().filter(mot -> mot.getMot().equals(nom)).findFirst().orElse(null);
 	}
 
 	@Override
 	public Mot ajouterMot(Mot mot) {
 		mots.add(mot);
 		return mot;
+	}
+
+	@Override
+	public Mot recupererMotParId(Long id) {
+		return mots.stream().filter(mot -> mot.getId().equals(id)).findFirst().orElse(null);
+	}
+
+	@Override
+	public Mot recupererMotAleatoire() {
+		return mots.get(random.nextInt(0, mots.size()));
+	}
+
+	@Override
+	public List<Mot> recupererMots() {
+		return mots;
 	}
 
 }
