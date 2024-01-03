@@ -12,7 +12,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import fr.esgi.buisness.Mot;
+import fr.esgi.business.Mot;
 import fr.esgi.service.MotService;
 
 public class MotServiceImpl implements MotService {

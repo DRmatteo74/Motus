@@ -1,4 +1,4 @@
-package fr.esgi.buisness;
+package fr.esgi.business;
 
 import java.util.Objects;
 

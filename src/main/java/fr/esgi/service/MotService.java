@@ -1,6 +1,6 @@
 package fr.esgi.service;
 
-import fr.esgi.buisness.Mot;
+import fr.esgi.business.Mot;
 
 public interface MotService {
 	void importerMot();
