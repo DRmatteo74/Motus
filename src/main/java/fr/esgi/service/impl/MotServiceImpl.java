@@ -96,6 +96,34 @@ public class MotServiceImpl implements MotService {
 	}
 
 	@Override
+	public Mot recupererMotAleatoireParNiveau(int difficulte) {
+		int min = 0, max = 100;
+		Mot mot = null;
+		switch (difficulte) {
+		case 1:
+			max = 8;
+			break;
+		case 2:
+			min = 9;
+			max = 11;
+			break;
+		default:
+			min = 12;
+			break;
+		}
+
+		do {
+			mot = recupererMotAleatoire();
+			System.out.println("mot : " + mot.getMot());
+			System.out.println("taille : " + mot.getLongueurMot());
+			System.out.println("min : " + min);
+			System.out.println("max : " + max);
+		} while (mot.getLongueurMot() < min || mot.getLongueurMot() > max);
+
+		return mot;
+	}
+
+	@Override
 	public List<Mot> recupererMots() {
 		return mots;
 	}

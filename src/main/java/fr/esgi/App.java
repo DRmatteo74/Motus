@@ -14,20 +14,32 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-
 	private static MotService motService = new MotServiceImpl();
 
 	private static Scene scene;
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		scene = new Scene(loadFXML("primary"), 640, 480);
+		scene = new Scene(loadFXML("primary"), 800, 600);
 		stage.setScene(scene);
 		stage.show();
 	}
 
-	static void setRoot(String fxml) throws IOException {
-		scene.setRoot(loadFXML(fxml));
+	public static void setRoot(String fxml, Object data) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+		Parent root = fxmlLoader.load();
+
+		// Accéder au contrôleur associé au FXML et transmettre les données
+		if (data != null) {
+			if (fxmlLoader.getController() instanceof JeuController) {
+				JeuController jeuController = (JeuController) fxmlLoader.getController();
+				jeuController.initializeData(data);
+			}
+		}
+
+		scene.setRoot(root);
+
 	}
 
 	private static Parent loadFXML(String fxml) throws IOException {
