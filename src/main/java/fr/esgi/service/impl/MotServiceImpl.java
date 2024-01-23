@@ -128,4 +128,10 @@ public class MotServiceImpl implements MotService {
 		return mots;
 	}
 
+	@Override
+	public boolean appartenirAuMot(String mot) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * JavaFX App
+ * h JavaFX App
  */
 public class App extends Application {
 	private static MotService motService = new MotServiceImpl();

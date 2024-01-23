@@ -19,4 +19,5 @@ public interface MotService {
 
 	Mot ajouterMot(Mot mot);
 
+	boolean appartenirAuMot(String mot);
 }

@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 
 import fr.esgi.business.Mot;
 import fr.esgi.service.AffichageService;
+import fr.esgi.service.JeuService;
 import fr.esgi.service.MotService;
 import fr.esgi.service.impl.AffichageServiceImpl;
+import fr.esgi.service.impl.JeuServiceImpl;
 import fr.esgi.service.impl.MotServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +24,8 @@ public class JeuController implements Initializable {
 	private AffichageService affichageService = new AffichageServiceImpl();
 
 	private MotService motService = new MotServiceImpl();
+
+	private JeuService jeuService = new JeuServiceImpl();
 
 	@FXML
 	private GridPane grilleJeu;
@@ -119,36 +123,13 @@ public class JeuController implements Initializable {
 	@FXML
 	private Button[] boutons;
 
-	private int difficulte;
-
 	private int nbPartieRestante;
 
 	private Mot motATrouver;
 
-	private int taille;
-
 	private int nombreEssai = 0;
 
 	private String motRentrer;
-
-	public void initializeData(Object data) {
-		if (data instanceof int[]) {
-			int[] dataArray = (int[]) data;
-
-			// Afficher chaque élément du tableau
-			/*
-			 * for (int i = 0; i < dataArray.length; i++) { System.out.println("Élément " +
-			 * i + ": " + dataArray[i]); }
-			 */
-			difficulte = dataArray[0];
-			nbPartieRestante = dataArray[1];
-		} else {
-			System.out.println("Le type de données n'est pas pris en charge : " + data.getClass());
-		}
-		motATrouver = motService.recupererMotAleatoire();
-		motRentrer = Character.toUpperCase(motATrouver.getMot().charAt(0)) + "";
-		affichageService.afficherGrilleDeJeuInterface(motATrouver, grilleJeu);
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -159,17 +140,43 @@ public class JeuController implements Initializable {
 		// motATrouver = motService.recupererMotAleatoireParNiveau(difficulte);
 		affichageService.centrerItemsJeuInterface(grilleJeu, titreJeu, anchorClavier);
 		// affichageService.afficherGrilleDeJeuInterface(motATrouver, grilleJeu);
-		affichageService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, taille);
+
+	}
+
+	public void initializeData(Object data) {
+		if (data instanceof int[]) {
+			int[] dataArray = (int[]) data;
+
+			// Afficher chaque élément du tableau
+			/*
+			 * for (int i = 0; i < dataArray.length; i++) { System.out.println("Élément " +
+			 * i + ": " + dataArray[i]); }
+			 */
+			nbPartieRestante = dataArray[1];
+		} else {
+			System.out.println("Le type de données n'est pas pris en charge : " + data.getClass());
+		}
+		motATrouver = motService.recupererMotAleatoire();
+		System.out.println(motATrouver);
+		motRentrer = Character.toUpperCase(motATrouver.getMot().charAt(0)) + "";
+		affichageService.afficherGrilleDeJeuInterface(motATrouver, grilleJeu, buttonVal);
+		jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal);
+
 	}
 
 	@FXML
 	private void SUP(ActionEvent event) {
-		System.out.println("coucou");
+		jeuService.supprimerLabelJeu(grilleJeu, nombreEssai, buttonVal);
 	}
 
 	@FXML
 	private void VAL(ActionEvent event) {
-		System.out.println("coucou");
+		motRentrer = jeuService.recupererMot(grilleJeu, nombreEssai);
+		if (motService.recupererMot(motRentrer) == null) {
+			System.out.println("Votre mot n'existe pas");
+		} else {
+			jeuService.verifierMot(motRentrer, motATrouver.getMot(), grilleJeu, nombreEssai);
+		}
 	}
 
 }

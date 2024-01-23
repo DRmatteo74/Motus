@@ -1,7 +1,6 @@
 package fr.esgi.service.impl;
 
 import java.io.IOException;
-import java.util.List;
 
 import fr.esgi.App;
 import fr.esgi.business.Joueur;
@@ -25,6 +24,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
@@ -194,7 +194,7 @@ public class AffichageServiceImpl implements AffichageService {
 	}
 
 	@Override
-	public void afficherGrilleDeJeuInterface(Mot motATrouver, GridPane grilleJeu) {
+	public void afficherGrilleDeJeuInterface(Mot motATrouver, GridPane grilleJeu, Button buttonVal) {
 		int taille = motATrouver.getLongueurMot();
 		// Supprimer toutes les colonnes existantes
 		grilleJeu.getColumnConstraints().clear();
@@ -228,36 +228,23 @@ public class AffichageServiceImpl implements AffichageService {
 				grilleJeu.add(label, col, row);
 			}
 		}
+		buttonVal.setDisable(true);
 	}
 
 	@Override
-	public void creerBoutonJeu(List<Button> boutons, int nbEssai, GridPane grilleJeu, int taille) {
-		for (Button button : boutons) {
-			button.setOnAction(event -> {
-				// Action à effectuer lorsqu'un bouton est cliqué
-				String letter = button.getText();
-				int colonneEcriture = lireLabelJeu(grilleJeu, nbEssai, taille);
-				System.out.println("Bouton " + letter + " cliqué !");
-			});
-		}
-	}
+	public void changerCouleurGrilleInterface(GridPane grilleJeu, int ligne, int colonne, Color couleur) {
+		String style = String.format("-fx-background-color: #%02X%02X%02X;", (int) (couleur.getRed() * 255),
+				(int) (couleur.getGreen() * 255), (int) (couleur.getBlue() * 255));
 
-	@Override
-	public int lireLabelJeu(GridPane grilleJeu, int ligne, int colonne) {
-		// Vérifier si le nœud à la position spécifiée est un Label
-		for (var node : grilleJeu.getChildren()) {
-			if (GridPane.getRowIndex(node) == ligne && GridPane.getColumnIndex(node) == colonne
-					&& node instanceof Label) {
-				Label label = (Label) node;
-				String texteLabel = label.getText();
-				if (texteLabel == "_") {
-					return GridPane.getColumnIndex(node);
-				}
-				System.out.println("Texte du Label à la position (" + ligne + ", " + colonne + ") : " + texteLabel);
-				// Vous pouvez retourner ou faire autre chose avec le label ici si nécessaire
+		for (javafx.scene.Node node : grilleJeu.getChildren()) {
+			Integer rowIndex = GridPane.getRowIndex(node);
+			Integer colIndex = GridPane.getColumnIndex(node);
+
+			if (rowIndex != null && colIndex != null && rowIndex == ligne && colIndex == colonne) {
+				((Label) node).setStyle(style);
+				break;
 			}
 		}
-		return -1;
 	}
 
 }
