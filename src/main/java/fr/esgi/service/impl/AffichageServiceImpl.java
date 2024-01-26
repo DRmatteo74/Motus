@@ -124,11 +124,12 @@ public class AffichageServiceImpl implements AffichageService {
 
 	@Override
 	public void creerBoutonMenu(SplitMenuButton buttonPartieRapide) {
-		MenuItem facile = new MenuItem("Niveau facile (8 lettres maxi)");
-		MenuItem moyen = new MenuItem("Niveau moyen (9 à 11 lettres)");
-		MenuItem difficile = new MenuItem("Niveau difficile (12 lettres et plus)");
+		MenuItem facile = new MenuItem("Niveau facile (6 lettres)");
+		MenuItem moyen = new MenuItem("Niveau moyen (7 lettres)");
+		MenuItem difficile = new MenuItem("Niveau difficile (8 lettres)");
+		MenuItem aleatoire = new MenuItem("Niveau aléatoire");
 
-		buttonPartieRapide.getItems().addAll(facile, moyen, difficile);
+		buttonPartieRapide.getItems().addAll(facile, moyen, difficile, aleatoire);
 
 		// Permets à la page de jeu de savoir la difficulté (1, 2, 3) et le nombre de
 		// partie (0/1)
@@ -153,6 +154,15 @@ public class AffichageServiceImpl implements AffichageService {
 		});
 		difficile.setOnAction((e) -> {
 			int[] donneeATransmettre = { 3, 0 };
+			try {
+				App.setRoot("jeu", donneeATransmettre);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		aleatoire.setOnAction((e) -> {
+			int[] donneeATransmettre = { 0, 0 };
 			try {
 				App.setRoot("jeu", donneeATransmettre);
 			} catch (IOException e1) {
@@ -233,8 +243,9 @@ public class AffichageServiceImpl implements AffichageService {
 
 	@Override
 	public void changerCouleurGrilleInterface(GridPane grilleJeu, int ligne, int colonne, Color couleur) {
-		String style = String.format("-fx-background-color: #%02X%02X%02X;", (int) (couleur.getRed() * 255),
-				(int) (couleur.getGreen() * 255), (int) (couleur.getBlue() * 255));
+		String style = String.format(
+				"-fx-background-color: #%02X%02X%02X; -fx-border-color: black; -fx-border-width: 1px; -fx-font-size: 16px; -fx-min-width: 30px; -fx-alignment: center;",
+				(int) (couleur.getRed() * 255), (int) (couleur.getGreen() * 255), (int) (couleur.getBlue() * 255));
 
 		for (javafx.scene.Node node : grilleJeu.getChildren()) {
 			Integer rowIndex = GridPane.getRowIndex(node);

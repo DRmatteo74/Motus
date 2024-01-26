@@ -90,22 +90,20 @@ public class JeuServiceImpl implements JeuService {
 			if (appartenirAuMot(motTrouver.charAt(i), motGagnant)) {
 				// si la lettre est a la bonne place j'incrémente le nombre de lettre juste de 1
 				if (situerCorrectement(motTrouver.charAt(i), motGagnant.charAt(i))) {
-					System.out.println("'" + motTrouver.charAt(i) + "'est dans le mot et à la bonne place/");
-					affichageService.changerCouleurGrilleInterface(grilleJeu, nbEssai, i, Color.GREEN);
+					affichageService.changerCouleurGrilleInterface(grilleJeu, nbEssai, i, Color.LIGHTGREEN);
 					nbLettreJuste = nbLettreJuste + 1;
 				} else {
-					if (supprimerDoublon(motGagnant, motTrouver, motTrouver.charAt(i), i)) {
-						System.out.println("'" + motTrouver.charAt(i) + "'n'est pas bon/ ");
-					} else {
-						System.out.println("'" + motTrouver.charAt(i) + "'est dans le mot mais à la mauvaise place/ ");
+					if (!(supprimerDoublon(motGagnant, motTrouver, motTrouver.charAt(i), i))) {
 						affichageService.changerCouleurGrilleInterface(grilleJeu, nbEssai, i, Color.YELLOW);
 					}
 				}
-			} else {
-				System.out.println("'" + motTrouver.charAt(i) + "'n'est pas dans le mot/ ");
 			}
 		}
-		return true;
+		if (nbLettreJuste == motGagnant.length()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

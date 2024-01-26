@@ -1,16 +1,29 @@
 package fr.esgi;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import fr.esgi.business.Difficulte;
 import fr.esgi.business.Mot;
+import fr.esgi.business.Partie;
+import fr.esgi.business.Question;
 import fr.esgi.service.AffichageService;
+import fr.esgi.service.DifficulteService;
 import fr.esgi.service.JeuService;
+import fr.esgi.service.JoueurService;
 import fr.esgi.service.MotService;
+import fr.esgi.service.PartieService;
+import fr.esgi.service.QuestionService;
 import fr.esgi.service.impl.AffichageServiceImpl;
+import fr.esgi.service.impl.DifficulteServiceImpl;
 import fr.esgi.service.impl.JeuServiceImpl;
+import fr.esgi.service.impl.JoueurServiceImpl;
 import fr.esgi.service.impl.MotServiceImpl;
+import fr.esgi.service.impl.PartieServiceImpl;
+import fr.esgi.service.impl.QuestionServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,6 +39,14 @@ public class JeuController implements Initializable {
 	private MotService motService = new MotServiceImpl();
 
 	private JeuService jeuService = new JeuServiceImpl();
+
+	private QuestionService questionService = new QuestionServiceImpl();
+
+	private PartieService partieService = new PartieServiceImpl();
+
+	private DifficulteService difficulteService = new DifficulteServiceImpl();
+
+	private JoueurService joueurService = new JoueurServiceImpl();
 
 	@FXML
 	private GridPane grilleJeu;
@@ -125,11 +146,23 @@ public class JeuController implements Initializable {
 
 	private int nbPartieRestante;
 
+	private int difficulteChoisi;
+
 	private Mot motATrouver;
 
 	private int nombreEssai = 0;
 
 	private String motRentrer;
+
+	private Long tempsDebut;
+
+	private Long tempsFin;
+
+	private Long tempsTotal;
+
+	private List<String> listReponse = new ArrayList<>();
+
+	List<Question> listQuestion = new ArrayList<>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -147,20 +180,25 @@ public class JeuController implements Initializable {
 		if (data instanceof int[]) {
 			int[] dataArray = (int[]) data;
 
-			// Afficher chaque élément du tableau
-			/*
-			 * for (int i = 0; i < dataArray.length; i++) { System.out.println("Élément " +
-			 * i + ": " + dataArray[i]); }
-			 */
 			nbPartieRestante = dataArray[1];
+			difficulteChoisi = dataArray[0];
 		} else {
 			System.out.println("Le type de données n'est pas pris en charge : " + data.getClass());
 		}
-		motATrouver = motService.recupererMotAleatoire();
+		if (difficulteChoisi == 0) {
+			motATrouver = motService.recupererMotAleatoire();
+		} else {
+			motATrouver = motService.recupererMotAleatoireParNiveau(difficulteChoisi);
+		}
+		if (nbPartieRestante == 0 || nbPartieRestante == 1) {
+			Difficulte difficulte = difficulteService.recupererDifficulteParId((long) difficulteChoisi);
+			partieService.innitialiserPartie(listQuestion, difficulte, joueurService.recupererJoueur());
+		}
 		System.out.println(motATrouver);
 		motRentrer = Character.toUpperCase(motATrouver.getMot().charAt(0)) + "";
 		affichageService.afficherGrilleDeJeuInterface(motATrouver, grilleJeu, buttonVal);
 		jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal);
+		tempsDebut = System.currentTimeMillis();
 
 	}
 
@@ -175,7 +213,29 @@ public class JeuController implements Initializable {
 		if (motService.recupererMot(motRentrer) == null) {
 			System.out.println("Votre mot n'existe pas");
 		} else {
-			jeuService.verifierMot(motRentrer, motATrouver.getMot(), grilleJeu, nombreEssai);
+			listReponse.add(motRentrer);
+			boolean aGagner = jeuService.verifierMot(motRentrer, motATrouver.getMot(), grilleJeu, nombreEssai);
+			// partie gagner
+			if (aGagner) {
+				tempsFin = System.currentTimeMillis();
+				tempsTotal = (tempsFin - tempsDebut) / 1000;
+				Partie partie = partieService.recupererDernierePartie();
+				Question question = questionService.creerQuestion(tempsTotal, listReponse, motATrouver, partie);
+				partieService.changerListQuestion(partie, question);
+
+			} else {
+				// parti perdu
+				if (nombreEssai > 6) {
+					Partie partie = partieService.recupererDernierePartie();
+					Question question = questionService.creerQuestion(null, listReponse, motATrouver, partie);
+					partieService.changerListQuestion(partie, question);
+				}
+				// essaie suivant
+				else {
+					nombreEssai += 1;
+					jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal);
+				}
+			}
 		}
 	}
 
