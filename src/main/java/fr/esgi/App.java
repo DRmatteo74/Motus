@@ -25,6 +25,10 @@ public class App extends Application {
 		stage.show();
 	}
 
+	/**
+	 * Modification de setRoot pour prendre un parametre qui va passer la difficulte
+	 * et le nombre de partie Restante pour le jeu
+	 */
 	public static void setRoot(String fxml, Object data) throws IOException {
 
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));

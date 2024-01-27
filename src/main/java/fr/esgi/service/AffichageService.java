@@ -8,6 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+/**
+ * Service qui concerne toutes fonctions gérant l'affichage, le palcement ou
+ * l'animation des éléments
+ */
 public interface AffichageService {
 
 	// page de connexion

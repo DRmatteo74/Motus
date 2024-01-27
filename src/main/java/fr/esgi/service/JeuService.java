@@ -5,6 +5,9 @@ import java.util.List;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Service qui concerne toutes fonctions permettant le bon déroulement du jeu
+ */
 public interface JeuService {
 
 	void creerBoutonJeu(List<Button> boutons, int nbEssai, GridPane grilleJeu, Button buttonVal);

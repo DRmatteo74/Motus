@@ -166,16 +166,22 @@ public class JeuController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// créer une liste de boutton
 		boutons = new Button[] { buttonA, buttonZ, buttonE, buttonR, buttonT, buttonY, buttonU, buttonI, buttonO,
 				buttonP, buttonQ, buttonS, buttonD, buttonF, buttonG, buttonH, buttonJ, buttonK, buttonL, buttonM,
 				buttonW, buttonX, buttonC, buttonV, buttonB, buttonN };
 
-		// motATrouver = motService.recupererMotAleatoireParNiveau(difficulte);
+		// j'initialise correctement mon décor
 		affichageService.centrerItemsJeuInterface(grilleJeu, titreJeu, anchorClavier);
-		// affichageService.afficherGrilleDeJeuInterface(motATrouver, grilleJeu);
 
 	}
 
+	/**
+	 * Je recupere les éléments données dans mon changement de page et j'initialise
+	 * des éléments
+	 * 
+	 * @param data
+	 */
 	public void initializeData(Object data) {
 		if (data instanceof int[]) {
 			int[] dataArray = (int[]) data;
@@ -185,16 +191,20 @@ public class JeuController implements Initializable {
 		} else {
 			System.out.println("Le type de données n'est pas pris en charge : " + data.getClass());
 		}
+		// je choisi la difficulte
 		if (difficulteChoisi == 0) {
 			motATrouver = motService.recupererMotAleatoire();
 		} else {
 			motATrouver = motService.recupererMotAleatoireParNiveau(difficulteChoisi);
 		}
+		// si nous sommes en debut de jeu, je créer un objet Partie
 		if (nbPartieRestante == 0 || nbPartieRestante == 1) {
 			Difficulte difficulte = difficulteService.recupererDifficulteParId((long) difficulteChoisi);
 			partieService.innitialiserPartie(listQuestion, difficulte, joueurService.recupererJoueur());
 		}
+		// aide à résoudre
 		System.out.println(motATrouver);
+		// j'initialise mes boutons, ma grille et je démarre le timer
 		motRentrer = Character.toUpperCase(motATrouver.getMot().charAt(0)) + "";
 		affichageService.afficherGrilleDeJeuInterface(motATrouver, grilleJeu, buttonVal);
 		jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal);
@@ -202,36 +212,60 @@ public class JeuController implements Initializable {
 
 	}
 
+	/**
+	 * Bouton supprimé
+	 * 
+	 * @param event
+	 */
 	@FXML
 	private void SUP(ActionEvent event) {
 		jeuService.supprimerLabelJeu(grilleJeu, nombreEssai, buttonVal);
 	}
 
+	/**
+	 * Bouton validé
+	 * 
+	 * @param event
+	 */
 	@FXML
 	private void VAL(ActionEvent event) {
 		motRentrer = jeuService.recupererMot(grilleJeu, nombreEssai);
+		// je vérifie si le mot existe
 		if (motService.recupererMot(motRentrer) == null) {
 			System.out.println("Votre mot n'existe pas");
 		} else {
+			// je l'ajoute à ma liste de réponse
 			listReponse.add(motRentrer);
+			// je vérifie si je gagne
 			boolean aGagner = jeuService.verifierMot(motRentrer, motATrouver.getMot(), grilleJeu, nombreEssai);
 			// partie gagner
 			if (aGagner) {
+				// j'arrete le timeret je mets à jour ou créer ma parties et ma question
 				tempsFin = System.currentTimeMillis();
 				tempsTotal = (tempsFin - tempsDebut) / 1000;
 				Partie partie = partieService.recupererDernierePartie();
 				Question question = questionService.creerQuestion(tempsTotal, listReponse, motATrouver, partie);
 				partieService.changerListQuestion(partie, question);
+				// si c'est la fin de la partie
+				if (nbPartieRestante < 2) {
+					joueurService.ajouterPartie(joueurService.recupererJoueur(), partie);
+				} else {
+					// sinon on continue à jouer (partie multiple question)
+					nbPartieRestante = nbPartieRestante - 1;
+				}
 
 			} else {
 				// parti perdu
 				if (nombreEssai > 6) {
+					// je mets à jour ou créer ma partie et ma question
 					Partie partie = partieService.recupererDernierePartie();
 					Question question = questionService.creerQuestion(null, listReponse, motATrouver, partie);
 					partieService.changerListQuestion(partie, question);
+					joueurService.ajouterPartie(joueurService.recupererJoueur(), partie);
 				}
 				// essaie suivant
 				else {
+					// j'augmente le nombre d'essaie et je reinitiliase mes boutons
 					nombreEssai += 1;
 					jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal);
 				}

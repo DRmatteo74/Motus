@@ -7,6 +7,9 @@ import fr.esgi.business.Mot;
 import fr.esgi.business.Partie;
 import fr.esgi.business.Question;
 
+/**
+ * Service qui concerne toutes fonctions de la class Question
+ */
 public interface QuestionService {
 
 	Question creerQuestion(Long tempsReponse, List<String> reponse, Mot mot, Partie partie);

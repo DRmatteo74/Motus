@@ -31,8 +31,16 @@ import javafx.util.Duration;
 public class AffichageServiceImpl implements AffichageService {
 
 	private MotService motService = new MotServiceImpl();
+
 	private JoueurService joueurService = new JoueurServiceImpl();
 
+	/**
+	 * Change les trois mots de l'écran de démarage
+	 * 
+	 * @param mot1
+	 * @param mot2
+	 * @param mot3
+	 */
 	@Override
 	public void changerMotInterfaceAcceuil(Label mot1, Label mot2, Label mot3) {
 
@@ -42,6 +50,15 @@ public class AffichageServiceImpl implements AffichageService {
 
 	}
 
+	/**
+	 * Anim les trois mots de l'écran de démarage et change le titre si le curseur
+	 * survole
+	 * 
+	 * @param mot1
+	 * @param mot2
+	 * @param mot3
+	 * @param label
+	 */
 	@Override
 	public void animerMotInterfaceAcceuil(Label mot1, Label mot2, Label mot3, Label label) {
 		TranslateTransition translate1 = new TranslateTransition();
@@ -116,23 +133,41 @@ public class AffichageServiceImpl implements AffichageService {
 
 	}
 
+	///////////////////////////////////////////////////
+	// page Acceuil
+	//////////////////////////////////////////////////
+
+	/**
+	 * Affiche le pseudo du joueur
+	 * 
+	 * @param labelPseudo
+	 */
 	@Override
 	public void recupererInfoJoueurInterfaceMenu(Label labelPseudo) {
+		// recupere le joueur
 		Joueur joueur = joueurService.recupererJoueur();
 		labelPseudo.setText(joueur.getPseudo());
 	}
 
+	/**
+	 * Créer le bouton Split pour les parties rapides
+	 * 
+	 * @param buttonPartieRapide
+	 */
 	@Override
 	public void creerBoutonMenu(SplitMenuButton buttonPartieRapide) {
+		// création des choix possible
 		MenuItem facile = new MenuItem("Niveau facile (6 lettres)");
 		MenuItem moyen = new MenuItem("Niveau moyen (7 lettres)");
 		MenuItem difficile = new MenuItem("Niveau difficile (8 lettres)");
 		MenuItem aleatoire = new MenuItem("Niveau aléatoire");
 
+		// ajout des choix
 		buttonPartieRapide.getItems().addAll(facile, moyen, difficile, aleatoire);
 
-		// Permets à la page de jeu de savoir la difficulté (1, 2, 3) et le nombre de
-		// partie (0/1)
+		// defini l'action sur le clique d'un des choix
+		// Parametre 1 : Permets à la page de jeu de savoir la difficulté (1, 2, 3, 0)
+		// Parametre 2 : Le nombre de partie (0/4) pour rapide ou longue
 
 		facile.setOnAction((e) -> {
 			int[] donneeATransmettre = { 1, 0 };
@@ -172,6 +207,17 @@ public class AffichageServiceImpl implements AffichageService {
 		});
 	}
 
+	//////////////////////////////////////////
+	// page de jeu
+	///////////////////////////////////////////
+
+	/**
+	 * Définit la postition du clavier et de la grille sur la page de jeu
+	 * 
+	 * @param grilleJeu
+	 * @param titreJeu
+	 * @param anchorClavier
+	 */
 	@Override
 	public void centrerItemsJeuInterface(GridPane grilleJeu, Label titreJeu, AnchorPane anchorClavier) {
 		// Obtenez le conteneur parent commun pour le label et la grille
@@ -190,7 +236,7 @@ public class AffichageServiceImpl implements AffichageService {
 				double centerXAnchor = (parentContainer.getWidth() - anchorClavier.getWidth()) / 2;
 				anchorClavier.setLayoutX(centerXAnchor);
 
-				double bottomMargin = 10; // Marge en bas (ajustez selon vos besoins)
+				double bottomMargin = 10; // Marge en bas
 				double centerYAnchor = parentContainer.getHeight() - anchorClavier.getHeight() - bottomMargin;
 				anchorClavier.setLayoutY(centerYAnchor);
 			}
@@ -203,12 +249,20 @@ public class AffichageServiceImpl implements AffichageService {
 		dimensionsChangeListener.changed(null, null, null);
 	}
 
+	/**
+	 * Créer la grille de bonne longueur et créer des label texte dedans
+	 * 
+	 * @param motATrouver
+	 * @param grilleJeu
+	 * @param buttonVal
+	 */
 	@Override
 	public void afficherGrilleDeJeuInterface(Mot motATrouver, GridPane grilleJeu, Button buttonVal) {
 		int taille = motATrouver.getLongueurMot();
 		// Supprimer toutes les colonnes existantes
 		grilleJeu.getColumnConstraints().clear();
 
+		// defini la taille de chaque carreau
 		for (int col = 0; col < taille; col++) {
 			ColumnConstraints colConst = new ColumnConstraints();
 			colConst.setPercentWidth(100.0 / taille);
@@ -220,29 +274,43 @@ public class AffichageServiceImpl implements AffichageService {
 
 		grilleJeu.setVgap(10.0);
 
+		// defini la taille de chaque carreau
 		for (int row = 0; row < 6; row++) {
 			RowConstraints rowConst = new RowConstraints();
 			rowConst.setPercentHeight(100.0 / 6);
 			grilleJeu.getRowConstraints().add(rowConst);
 
+			// créer un label dans chaque carreau
 			for (int col = 0; col < taille; col++) {
 				Label label = new Label();
 				if (col == 0 && row == 0) {
+					// initialise la premiere lettre du mot a trouver
 					String premiereLettre = Character.toUpperCase(motATrouver.getMot().charAt(0)) + "";
 					label.setText(premiereLettre);
 				} else {
 					label.setText("_");
 				}
+				// defini le style de mes labels
 				label.setStyle(
 						"-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white; -fx-font-size: 16px; -fx-min-width: 30px; -fx-alignment: center;");
 				grilleJeu.add(label, col, row);
 			}
 		}
+		// desactive le boutton valider
 		buttonVal.setDisable(true);
 	}
 
+	/**
+	 * Change la couleur des labeltexte une fois que le joueur a validé
+	 * 
+	 * @param ligne
+	 * @param grilleJeu
+	 * @param colonne
+	 * @param couleur
+	 */
 	@Override
 	public void changerCouleurGrilleInterface(GridPane grilleJeu, int ligne, int colonne, Color couleur) {
+		// defini le style du label
 		String style = String.format(
 				"-fx-background-color: #%02X%02X%02X; -fx-border-color: black; -fx-border-width: 1px; -fx-font-size: 16px; -fx-min-width: 30px; -fx-alignment: center;",
 				(int) (couleur.getRed() * 255), (int) (couleur.getGreen() * 255), (int) (couleur.getBlue() * 255));
@@ -251,6 +319,7 @@ public class AffichageServiceImpl implements AffichageService {
 			Integer rowIndex = GridPane.getRowIndex(node);
 			Integer colIndex = GridPane.getColumnIndex(node);
 
+			// applique sur le label voulu
 			if (rowIndex != null && colIndex != null && rowIndex == ligne && colIndex == colonne) {
 				((Label) node).setStyle(style);
 				break;

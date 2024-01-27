@@ -9,6 +9,10 @@ public class DifficulteServiceImpl implements DifficulteService {
 
 	private static ArrayList<Difficulte> difficultes = new ArrayList<>();
 
+	/**
+	 * Créer les trois niveaux de difficultés et les ajoutes dans une liste
+	 * 
+	 */
 	@Override
 	public void creerDifficulte() {
 		Difficulte facile = new Difficulte("facile");

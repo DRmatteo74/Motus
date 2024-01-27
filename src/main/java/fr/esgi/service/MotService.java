@@ -4,6 +4,9 @@ import java.util.List;
 
 import fr.esgi.business.Mot;
 
+/**
+ * Service qui concerne toutes fonctions de la class Mot
+ */
 public interface MotService {
 	void importerMot();
 

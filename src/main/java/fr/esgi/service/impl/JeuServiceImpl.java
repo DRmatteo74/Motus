@@ -12,6 +12,14 @@ import javafx.scene.paint.Color;
 public class JeuServiceImpl implements JeuService {
 	private AffichageService affichageService = new AffichageServiceImpl();
 
+	/**
+	 * Créer les boutons du clavier pour le jeu
+	 * 
+	 * @param boutons
+	 * @param nbEssai
+	 * @param grilleJeu
+	 * @param buttonVal
+	 */
 	@Override
 	public void creerBoutonJeu(List<Button> boutons, int nbEssai, GridPane grilleJeu, Button buttonVal) {
 
@@ -24,17 +32,28 @@ public class JeuServiceImpl implements JeuService {
 		}
 	}
 
+	/**
+	 * Change le texte du label
+	 * 
+	 * @param ligne
+	 * @param grilleJeu
+	 * @param lettre
+	 * @param buttonVal
+	 */
 	@Override
 	public void modifierLabelJeu(GridPane grilleJeu, int ligne, String lettre, Button buttonVal) {
 		int taille = grilleJeu.getColumnCount() - 1;
 
+		// parcour la grille pour trouver le bon label
 		for (javafx.scene.Node node : grilleJeu.getChildren()) {
 			Integer rowIndex = GridPane.getRowIndex(node);
 			Integer colIndex = GridPane.getColumnIndex(node);
 
 			if (rowIndex != null && colIndex != null && rowIndex == ligne && ((Label) node).getText() == "_") {
+				// change le label
 				((Label) node).setText(lettre);
 				if (colIndex == taille) {
+					// active le bouton valider si le mot est à la bonne taille
 					buttonVal.setDisable(false);
 				}
 				break;
@@ -42,23 +61,35 @@ public class JeuServiceImpl implements JeuService {
 		}
 	}
 
+	/**
+	 * supprime la derniere lettre ecrite dans un label
+	 * 
+	 * @param ligne
+	 * @param grilleJeu
+	 * @param buttonVal
+	 */
 	@Override
 	public void supprimerLabelJeu(GridPane grilleJeu, int ligne, Button buttonVal) {
+		// j'initialise cette variable pour enlever le dernier element
 		int col = grilleJeu.getColumnCount();
 		int trouve = 0;
+		// je parcours la grille tant qu'il reste des éléments
 		while (col > 0) {
 			for (javafx.scene.Node node : grilleJeu.getChildren()) {
 				Integer rowIndex = GridPane.getRowIndex(node);
 				Integer colIndex = GridPane.getColumnIndex(node);
 
+				// je regarde si l'élément est différents de la valeur par défaults
 				if (rowIndex != null && colIndex != null && rowIndex == ligne && colIndex > 0
 						&& ((Label) node).getText() != "_" && colIndex == col) {
 					((Label) node).setText("_");
+					// je desactive le bouton validé
 					buttonVal.setDisable(true);
 					trouve = 1;
 					break;
 				}
 			}
+			// si l'élément est trouvé je sors de ma boucle
 			if (trouve == 1) {
 				break;
 			}
@@ -67,9 +98,18 @@ public class JeuServiceImpl implements JeuService {
 
 	}
 
+	/**
+	 * Récupère le mot rentrer par le joueur
+	 * 
+	 * @param ligne
+	 * @param grilleJeu
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String recupererMot(GridPane grilleJeu, int ligne) {
 		String motRentrer = "";
+		// je parcours les éléments de ma ligne un par un et je reforme le mot
 		for (javafx.scene.Node node : grilleJeu.getChildren()) {
 			Integer rowIndex = GridPane.getRowIndex(node);
 			Integer colIndex = GridPane.getColumnIndex(node);
@@ -78,18 +118,29 @@ public class JeuServiceImpl implements JeuService {
 				motRentrer = motRentrer + ((Label) node).getText();
 			}
 		}
-		System.out.println(motRentrer);
 		return motRentrer.toLowerCase();
 	}
 
+	/**
+	 * Change le texte du label
+	 * 
+	 * @param motTrouver
+	 * @param grilleJeu
+	 * @param motGagnant
+	 * @param nbEssai
+	 * 
+	 * @return boolean
+	 */
 	@Override
 	public boolean verifierMot(String motTrouver, String motGagnant, GridPane grilleJeu, int nbEssai) {
 		int nbLettreJuste = 0;
+		// Je parcours chaque lettre de mon mot
 		for (int i = 0; i < motGagnant.length(); i++) {
 			// je vérifie si la lettre appartient au mot recherché
 			if (appartenirAuMot(motTrouver.charAt(i), motGagnant)) {
 				// si la lettre est a la bonne place j'incrémente le nombre de lettre juste de 1
 				if (situerCorrectement(motTrouver.charAt(i), motGagnant.charAt(i))) {
+					// je change le design du label
 					affichageService.changerCouleurGrilleInterface(grilleJeu, nbEssai, i, Color.LIGHTGREEN);
 					nbLettreJuste = nbLettreJuste + 1;
 				} else {
@@ -106,6 +157,13 @@ public class JeuServiceImpl implements JeuService {
 		}
 	}
 
+	/**
+	 * je regarde si la lettre appartient au mot a trouver
+	 * 
+	 * @param caractere
+	 * @param motGagnant
+	 * @return boolean
+	 */
 	@Override
 	public boolean appartenirAuMot(char caractere, String motGagnant) {
 		if (motGagnant.contains(String.valueOf(caractere))) {
@@ -114,6 +172,13 @@ public class JeuServiceImpl implements JeuService {
 		return false;
 	}
 
+	/**
+	 * je regarde si la lettre est à la bonne place
+	 * 
+	 * @param caractere
+	 * @param caractereGagnant
+	 * @return boolean
+	 */
 	@Override
 	public boolean situerCorrectement(char caractere, char caractereGagnant) {
 		if (caractere == caractereGagnant) {
@@ -122,6 +187,18 @@ public class JeuServiceImpl implements JeuService {
 		return false;
 	}
 
+	/**
+	 * J'affiche correctement les lettres si pour qu'il n'y ai pas de doublons
+	 * 
+	 * si je rentre deux E et qu'il y en a que un seul dan sle mot à trouver un seul
+	 * apparaitra en verre ou en jaune
+	 * 
+	 * @param motGagnant
+	 * @param motJoueur
+	 * @param lettre
+	 * @param indice
+	 * @return boolean
+	 */
 	@Override
 	public boolean supprimerDoublon(String motGagnant, String motJoueur, char lettre, int indice) {
 		// autant du même caractere dans chaque mot, on les laisse
@@ -151,6 +228,13 @@ public class JeuServiceImpl implements JeuService {
 		}
 	}
 
+	/**
+	 * Compte le nombre d'un caractere dans un mot
+	 * 
+	 * @param mot
+	 * @param lettre
+	 * @return int
+	 */
 	@Override
 	public int compterLettre(String mot, char lettre) {
 		int count = 0;
