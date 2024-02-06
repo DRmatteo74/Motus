@@ -2,6 +2,7 @@ package fr.esgi.service;
 
 import java.util.List;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
@@ -10,7 +11,7 @@ import javafx.scene.layout.GridPane;
  */
 public interface JeuService {
 
-	void creerBoutonJeu(List<Button> boutons, int nbEssai, GridPane grilleJeu, Button buttonVal);
+	void creerBoutonJeu(List<Button> boutons, int nbEssai, GridPane grilleJeu, Button buttonVal, Scene scene);
 
 	void modifierLabelJeu(GridPane grilleJeu, int ligne, String letter, Button buttonVal);
 

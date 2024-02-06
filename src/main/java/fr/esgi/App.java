@@ -39,7 +39,7 @@ public class App extends Application {
 		if (data != null) {
 			if (fxmlLoader.getController() instanceof JeuController) {
 				JeuController jeuController = (JeuController) fxmlLoader.getController();
-				jeuController.initializeData(data);
+				jeuController.initializeData(data, scene);
 			}
 		}
 

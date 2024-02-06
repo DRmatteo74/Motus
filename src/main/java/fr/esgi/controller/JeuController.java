@@ -27,6 +27,7 @@ import fr.esgi.service.impl.QuestionServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -176,13 +177,17 @@ public class JeuController implements Initializable {
 
 	}
 
+	Scene scene = null;
+
 	/**
 	 * Je recupere les éléments données dans mon changement de page et j'initialise
 	 * des éléments
 	 * 
 	 * @param data
 	 */
-	public void initializeData(Object data) {
+	public void initializeData(Object data, Scene _scene) {
+		//Permet d'accéder à la scene et donc de détecter l'appuie sur le clavier
+		scene = _scene;
 		if (data instanceof int[]) {
 			int[] dataArray = (int[]) data;
 
@@ -207,7 +212,7 @@ public class JeuController implements Initializable {
 		// j'initialise mes boutons, ma grille et je démarre le timer
 		motRentrer = Character.toUpperCase(motATrouver.getMot().charAt(0)) + "";
 		affichageService.afficherGrilleDeJeuInterface(motATrouver, grilleJeu, buttonVal);
-		jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal);
+		jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal, scene);
 		tempsDebut = System.currentTimeMillis();
 
 	}
@@ -267,7 +272,7 @@ public class JeuController implements Initializable {
 				else {
 					// j'augmente le nombre d'essaie et je reinitiliase mes boutons
 					nombreEssai += 1;
-					jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal);
+					jeuService.creerBoutonJeu(Arrays.asList(boutons), nombreEssai, grilleJeu, buttonVal, scene);
 				}
 			}
 		}

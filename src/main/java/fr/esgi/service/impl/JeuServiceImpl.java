@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.esgi.service.AffichageService;
 import fr.esgi.service.JeuService;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -21,13 +22,23 @@ public class JeuServiceImpl implements JeuService {
 	 * @param buttonVal
 	 */
 	@Override
-	public void creerBoutonJeu(List<Button> boutons, int nbEssai, GridPane grilleJeu, Button buttonVal) {
+	public void creerBoutonJeu(List<Button> boutons, int nbEssai, GridPane grilleJeu, Button buttonVal, Scene scene) {
 
 		for (Button button : boutons) {
 			button.setOnAction(event -> {
 				// Action à effectuer lorsqu'un bouton est cliqué
 				String letter = button.getText();
 				modifierLabelJeu(grilleJeu, nbEssai, letter, buttonVal);
+			});
+		}
+
+		// Permet de détecter l'appuie sur le clavier
+		if(scene != null){
+			scene.setOnKeyPressed(event -> {
+				String letter = event.getText().toUpperCase(); // Obtenir la lettre de la touche pressée (en majuscules)
+				if (letter.matches("[A-Z]")) {
+					modifierLabelJeu(grilleJeu, nbEssai, letter, buttonVal);
+				}
 			});
 		}
 	}
