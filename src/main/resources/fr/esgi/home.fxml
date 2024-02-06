@@ -2,89 +2,52 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esgi.controller.HomeController">
    <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #B4001E;" VBox.vgrow="ALWAYS">
          <children>
+            <Region layoutX="58.0" layoutY="35.0" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: #2ab425;" />
+            <Region layoutX="149.0" layoutY="35.0" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: #ffff00;" />
             <Label fx:id="labelTitre" alignment="CENTER" layoutX="24.0" prefHeight="100.0" prefWidth="202.0" text="TUSMOT!" textAlignment="CENTER">
                <font>
-                  <Font name="Candara" size="44.0" />
+                  <Font name="Candara Bold" size="44.0" />
                </font>
             </Label>
-            <Button fx:id="buttonValider" layoutX="68.0" layoutY="291.0" mnemonicParsing="false" onAction="#handleButtonValider" prefHeight="56.0" prefWidth="115.0" text="Valider">
+            <Button fx:id="buttonValider" graphicTextGap="2.0" layoutX="36.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleButtonValider" prefHeight="46.0" prefWidth="179.0" style="-fx-background-color: #FFFFFF00; -fx-border-color: #2ab425; -fx-border-radius: 40px; -fx-border-width: 3px;" text="VALIDER" textFill="#2ab425">
                <font>
-                  <Font name="Candara" size="23.0" />
+                  <Font name="Candara Bold" size="23.0" />
                </font>
             </Button>
-            <TextField fx:id="textfieldPseudo" layoutX="32.0" layoutY="157.0" prefHeight="35.0" prefWidth="185.0" />
-            <Label layoutX="55.0" layoutY="107.0" prefHeight="35.0" prefWidth="140.0" text="Rentre ton pseudo :">
+            <TextField fx:id="textfieldPseudo" layoutX="32.0" layoutY="157.0" prefHeight="35.0" prefWidth="185.0" promptText="Rentre ton pseudo" style="-fx-background-color: #FFFFFF00; -fx-border-color: #f0ff48; -fx-border-radius: 40px; -fx-border-width: 3px; -fx-border-style: dashed;">
                <font>
-                  <Font name="Candara" size="16.0" />
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
+            <Label layoutX="36.0" layoutY="111.0" prefHeight="35.0" prefWidth="179.0" text="Rentre ton pseudo :">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
             <AnchorPane layoutX="307.0" layoutY="-1.0" prefHeight="374.0" prefWidth="331.0">
                <children>
-                  <Label fx:id="mot1" layoutX="67.0" layoutY="88.0" prefHeight="46.0" prefWidth="150.0" text="Courgette" textFill="#611f1f">
+                  <Label fx:id="mot1" layoutX="67.0" layoutY="88.0" prefHeight="46.0" prefWidth="150.0" text="Courgette" textFill="#f0ff48">
                      <font>
-                        <Font size="27.0" />
+                        <Font name="System Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label fx:id="mot2" layoutX="39.0" layoutY="27.0" prefHeight="46.0" prefWidth="170.0" text="Concombre" textFill="#2ab425">
+                  <Label fx:id="mot2" layoutX="39.0" layoutY="27.0" prefHeight="46.0" prefWidth="202.0" text="Concombre" textFill="#2ab425">
                      <font>
-                        <Font name="Candara" size="27.0" />
+                        <Font name="Candara Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="mot3" layoutX="31.0" layoutY="284.0" prefHeight="46.0" prefWidth="130.0" text="Carotte" textFill="#11478e">
+                  <Label fx:id="mot3" layoutX="77.0" layoutY="289.0" prefHeight="46.0" prefWidth="130.0" text="Carotte" textFill="#3e7bcb">
                      <font>
-                        <Font name="Candara" size="27.0" />
+                        <Font name="Candara Bold" size="29.0" />
                      </font>
                   </Label>
                </children>

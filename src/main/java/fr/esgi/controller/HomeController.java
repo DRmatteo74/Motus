@@ -44,7 +44,7 @@ public class HomeController implements Initializable {
 
 	@FXML
 	private void switchToSecondary() throws IOException {
-		App.setRoot("secondary");
+		App.setRoot("secondary", null);
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class HomeController implements Initializable {
 	}
 
 	@FXML
-	private void handleButtonValider(ActionEvent event) {
+	private void handleButtonValider(ActionEvent event) throws IOException {
 		joueurService.creerJoueur(textfieldPseudo.getText());
-		System.out.println("Texte saisi : " + textfieldPseudo.getText());
+		App.setRoot("menu", null);
 	}
 }

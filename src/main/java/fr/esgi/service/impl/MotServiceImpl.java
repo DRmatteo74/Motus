@@ -16,6 +16,10 @@ public class MotServiceImpl implements MotService {
 	private static ArrayList<Mot> mots = new ArrayList<>();
 	private static Random random = new Random();
 
+	/**
+	 * Import les mots des liens et les mets dans une liste
+	 * 
+	 */
 	@Override
 	public void importerMot() {
 		try {
@@ -74,30 +78,99 @@ public class MotServiceImpl implements MotService {
 		}
 	}
 
+	/**
+	 * Recupère un mot grâce à un String
+	 * 
+	 * @param ligne
+	 * @return Mot
+	 */
 	@Override
 	public Mot recupererMot(String nom) {
 		return mots.stream().filter(mot -> mot.getMot().equals(nom)).findFirst().orElse(null);
 	}
 
+	/**
+	 * Ajoute un mot à la liste de mot
+	 * 
+	 * @param Mot
+	 * @return Mot
+	 */
 	@Override
 	public Mot ajouterMot(Mot mot) {
 		mots.add(mot);
 		return mot;
 	}
 
+	/**
+	 * Recupere un mot par son id
+	 * 
+	 * @param id
+	 * @return Mot
+	 */
 	@Override
 	public Mot recupererMotParId(Long id) {
 		return mots.stream().filter(mot -> mot.getId().equals(id)).findFirst().orElse(null);
 	}
 
+	/**
+	 * Recupere un mot aléatoirement
+	 * 
+	 * @return Mot
+	 */
 	@Override
 	public Mot recupererMotAleatoire() {
 		return mots.get(random.nextInt(0, mots.size()));
 	}
 
+	/**
+	 * Recupere un mot par sa taille (definit par la difficulté)
+	 * 
+	 * @param difficulté
+	 * @return Mot
+	 */
+	@Override
+	public Mot recupererMotAleatoireParNiveau(int difficulte) {
+		int taille;
+		Mot mot = null;
+		switch (difficulte) {
+		case 1:
+			taille = 6;
+			break;
+		case 2:
+			taille = 7;
+			break;
+		default:
+			taille = 8;
+			break;
+		}
+
+		do {
+			mot = recupererMotAleatoire();
+		} while (mot.getLongueurMot() != taille);
+
+		return mot;
+	}
+
+	/**
+	 * Retourne la liste de tous les mots
+	 * 
+	 * @return List<Mot>
+	 */
 	@Override
 	public List<Mot> recupererMots() {
 		return mots;
+	}
+
+	/**
+	 * Verifie si un mot est déjà dans la liste de mot
+	 * 
+	 * @param mot
+	 * @return boolean
+	 */
+	@Override
+	public boolean appartenirAuMot(String mot) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
