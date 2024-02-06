@@ -1,11 +1,13 @@
 package fr.esgi.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import fr.esgi.App;
 import fr.esgi.business.Difficulte;
 import fr.esgi.business.Mot;
 import fr.esgi.business.Partie;
@@ -276,6 +278,11 @@ public class JeuController implements Initializable {
 				}
 			}
 		}
+	}
+
+	@FXML
+	private void handleButtonRetour(ActionEvent event) throws IOException {
+		App.setRoot("menu", null);
 	}
 
 }

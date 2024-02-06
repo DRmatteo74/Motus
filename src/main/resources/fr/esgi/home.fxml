@@ -50,6 +50,11 @@
                         <Font name="Candara Bold" size="29.0" />
                      </font>
                   </Label>
+                  <Button layoutX="262.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleButtonCredit" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFF; -fx-border-radius: 40px; -fx-border-width: 2px;" text="Crédit" textFill="WHITE" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

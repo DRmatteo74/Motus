@@ -27,11 +27,6 @@ public class MenuController implements Initializable {
 	@FXML
 	private SplitMenuButton buttonPartieRapide;
 
-	@FXML
-	private void switchToSecondary() throws IOException {
-		App.setRoot("secondary", null);
-	}
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		difficulteService.creerDifficulte();
@@ -42,8 +37,8 @@ public class MenuController implements Initializable {
 	}
 
 	@FXML
-	private void handleButtonValider(ActionEvent event) {
-
+	private void handleButtonCredit(ActionEvent event) throws IOException {
+		App.setRoot("credit", null);
 	}
 
 }
