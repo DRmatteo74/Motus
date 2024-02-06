@@ -292,7 +292,7 @@ public class AffichageServiceImpl implements AffichageService {
 				}
 				// defini le style de mes labels
 				label.setStyle(
-						"-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white; -fx-font-size: 16px; -fx-min-width: 30px; -fx-alignment: center;");
+						"-fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-color: #FFFFFF00; -fx-font-size: 16px; -fx-font-weight: bold; -fx-min-width: 30px; -fx-alignment: center; -fx-text-fill: white;");
 				grilleJeu.add(label, col, row);
 			}
 		}
@@ -312,7 +312,7 @@ public class AffichageServiceImpl implements AffichageService {
 	public void changerCouleurGrilleInterface(GridPane grilleJeu, int ligne, int colonne, Color couleur) {
 		// defini le style du label
 		String style = String.format(
-				"-fx-background-color: #%02X%02X%02X; -fx-border-color: black; -fx-border-width: 1px; -fx-font-size: 16px; -fx-min-width: 30px; -fx-alignment: center;",
+				"-fx-background-color: #%02X%02X%02X; -fx-border-color: black; -fx-font-weight: bold; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-font-size: 16px; -fx-min-width: 30px; -fx-alignment: center;",
 				(int) (couleur.getRed() * 255), (int) (couleur.getGreen() * 255), (int) (couleur.getBlue() * 255));
 
 		for (javafx.scene.Node node : grilleJeu.getChildren()) {

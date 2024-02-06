@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,53 +12,14 @@
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esgi.JeuController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="420.0" prefWidth="701.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="420.0" prefWidth="701.0" style="-fx-background-color: #B4001E;" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="titreJeu" layoutX="248.0" layoutY="14.0" text="TUSMO">
+            <Label fx:id="titreJeu" layoutX="279.0" layoutY="14.0" text="TUSMO">
                <font>
-                  <Font name="Candara" size="44.0" />
+                  <Font name="Candara Bold" size="44.0" />
                </font>
             </Label>
-            <GridPane fx:id="grilleJeu" layoutX="88.0" layoutY="106.0" prefHeight="90.0" prefWidth="462.0">
+            <GridPane fx:id="grilleJeu" layoutX="120.0" layoutY="109.0" prefHeight="90.0" prefWidth="462.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3px; -fx-border-radius: 10px;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -74,7 +30,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <AnchorPane fx:id="anchorClavier" layoutX="-1.0" layoutY="314.0" prefHeight="195.0" prefWidth="629.0">
+            <AnchorPane fx:id="anchorClavier" layoutX="32.0" layoutY="300.0" prefHeight="195.0" prefWidth="629.0">
                <children>
                   <GridPane prefHeight="139.0" prefWidth="638.0">
                     <columnConstraints>
@@ -95,140 +51,224 @@
                       <RowConstraints maxHeight="57.59995117187499" minHeight="48.79996337890624" prefHeight="48.79996337890624" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="buttonS" minWidth="28.0" mnemonicParsing="false" text="S" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="buttonS" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="S" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonQ" minWidth="28.0" mnemonicParsing="false" text="Q" GridPane.rowIndex="1">
+                        <Button fx:id="buttonQ" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="Q" textFill="WHITE" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonD" minWidth="28.0" mnemonicParsing="false" text="D" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button fx:id="buttonD" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="D" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonF" minWidth="28.0" mnemonicParsing="false" text="F" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <Button fx:id="buttonF" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="F" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonG" minWidth="28.0" mnemonicParsing="false" text="G" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <Button fx:id="buttonG" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="G" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonH" minWidth="28.0" mnemonicParsing="false" text="H" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                        <Button fx:id="buttonH" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="H" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonJ" minWidth="28.0" mnemonicParsing="false" text="J" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                        <Button fx:id="buttonJ" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="J" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonK" minWidth="28.0" mnemonicParsing="false" text="K" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                        <Button fx:id="buttonK" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="K" textFill="WHITE" GridPane.columnIndex="7" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonL" minWidth="28.0" mnemonicParsing="false" text="L" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                        <Button fx:id="buttonL" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="L" textFill="WHITE" GridPane.columnIndex="8" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonA" minWidth="28.0" mnemonicParsing="false" text="A">
+                        <Button fx:id="buttonA" graphicTextGap="0.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="A" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonZ" minWidth="28.0" mnemonicParsing="false" text="Z" GridPane.columnIndex="1">
+                        <Button fx:id="buttonZ" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="Z" textFill="WHITE" GridPane.columnIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonE" minWidth="28.0" mnemonicParsing="false" text="E" GridPane.columnIndex="2">
+                        <Button fx:id="buttonE" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="E" textFill="WHITE" GridPane.columnIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonR" minWidth="28.0" mnemonicParsing="false" text="R" GridPane.columnIndex="3">
+                        <Button fx:id="buttonR" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="R" textFill="WHITE" GridPane.columnIndex="3">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonT" minWidth="28.0" mnemonicParsing="false" text="T" GridPane.columnIndex="4">
+                        <Button fx:id="buttonT" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="T" textFill="WHITE" GridPane.columnIndex="4">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonY" minWidth="28.0" mnemonicParsing="false" text="Y" GridPane.columnIndex="5">
+                        <Button fx:id="buttonY" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="Y" textFill="WHITE" GridPane.columnIndex="5">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonU" minWidth="28.0" mnemonicParsing="false" text="U" GridPane.columnIndex="6">
+                        <Button fx:id="buttonU" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="U" textFill="WHITE" GridPane.columnIndex="6">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonI" minWidth="28.0" mnemonicParsing="false" text="I" GridPane.columnIndex="7">
+                        <Button fx:id="buttonI" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="I" textFill="WHITE" GridPane.columnIndex="7">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonO" minWidth="28.0" mnemonicParsing="false" text="O" GridPane.columnIndex="8">
+                        <Button fx:id="buttonO" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="O" textFill="WHITE" GridPane.columnIndex="8">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonP" minWidth="28.0" mnemonicParsing="false" text="P" GridPane.columnIndex="9">
+                        <Button fx:id="buttonP" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="P" textFill="WHITE" GridPane.columnIndex="9">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonM" minWidth="28.0" mnemonicParsing="false" text="M" GridPane.columnIndex="9" GridPane.rowIndex="1">
+                        <Button fx:id="buttonM" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="M" textFill="WHITE" GridPane.columnIndex="9" GridPane.rowIndex="1">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonW" minWidth="28.0" mnemonicParsing="false" text="W" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Button fx:id="buttonW" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="W" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonX" minWidth="28.0" mnemonicParsing="false" text="X" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        <Button fx:id="buttonX" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="X" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonC" minWidth="28.0" mnemonicParsing="false" text="C" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <Button fx:id="buttonC" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="C" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonV" minWidth="28.0" mnemonicParsing="false" text="V" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                        <Button fx:id="buttonV" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="V" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonB" minWidth="28.0" mnemonicParsing="false" text="B" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                        <Button fx:id="buttonB" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="B" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="buttonN" minWidth="28.0" mnemonicParsing="false" text="N" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                        <Button fx:id="buttonN" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFFFFF; -fx-border-radius: 5px; -fx-border-width: 3px; -fx-padding: 2px;" text="N" textFill="WHITE" GridPane.columnIndex="7" GridPane.rowIndex="2">
                            <padding>
                               <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                            </padding>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Button>
                      </children>
                   </GridPane>
-                  <Button fx:id="buttonSup" layoutX="37.0" layoutY="127.0" mnemonicParsing="false" onAction="#SUP" text="Supp" />
-                  <Button fx:id="buttonVal" layoutX="549.0" layoutY="127.0" mnemonicParsing="false" onAction="#VAL" text="Valider" />
+                  <Button fx:id="buttonSup" layoutX="37.0" layoutY="127.0" mnemonicParsing="false" onAction="#SUP" style="-fx-background-color: #FFFFFF00; -fx-border-color: #f0ff48; -fx-border-radius: 40px; -fx-border-width: 3px;" text="Supp" textFill="#f0ff48">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="buttonVal" layoutX="549.0" layoutY="127.0" mnemonicParsing="false" onAction="#VAL" style="-fx-background-color: #FFFFFF00; -fx-border-color: #2ab425; -fx-border-radius: 40px; -fx-border-width: 3px;" text="Valider" textFill="#2ab425">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </children></AnchorPane>
