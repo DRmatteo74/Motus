@@ -36,7 +36,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class JeuController implements Initializable {
-
+	
 	private AffichageService affichageService = new AffichageServiceImpl();
 
 	private MotService motService = new MotServiceImpl();
@@ -147,6 +147,9 @@ public class JeuController implements Initializable {
 	@FXML
 	private Button[] boutons;
 
+	@FXML
+	public Label statutLabel;
+
 	private int nbPartieRestante;
 
 	private int difficulteChoisi;
@@ -177,6 +180,7 @@ public class JeuController implements Initializable {
 		// j'initialise correctement mon décor
 		affichageService.centrerItemsJeuInterface(grilleJeu, titreJeu, anchorClavier);
 
+		statutLabel.setText("");
 	}
 
 	Scene scene = null;
@@ -240,6 +244,7 @@ public class JeuController implements Initializable {
 		// je vérifie si le mot existe
 		if (motService.recupererMot(motRentrer) == null) {
 			System.out.println("Votre mot n'existe pas");
+			statutLabel.setText("Ce mot n'est pas dans la liste !");
 		} else {
 			// je l'ajoute à ma liste de réponse
 			listReponse.add(motRentrer);
@@ -247,6 +252,7 @@ public class JeuController implements Initializable {
 			boolean aGagner = jeuService.verifierMot(motRentrer, motATrouver.getMot(), grilleJeu, nombreEssai);
 			// partie gagner
 			if (aGagner) {
+				statutLabel.setText("Vous avez gagné !");
 				// j'arrete le timeret je mets à jour ou créer ma parties et ma question
 				tempsFin = System.currentTimeMillis();
 				tempsTotal = (tempsFin - tempsDebut) / 1000;
@@ -264,6 +270,7 @@ public class JeuController implements Initializable {
 			} else {
 				// parti perdu
 				if (nombreEssai > 6) {
+					statutLabel.setText("Vous avez perdu !");
 					// je mets à jour ou créer ma partie et ma question
 					Partie partie = partieService.recupererDernierePartie();
 					Question question = questionService.creerQuestion(null, listReponse, motATrouver, partie);

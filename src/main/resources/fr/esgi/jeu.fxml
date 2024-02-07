@@ -30,9 +30,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <AnchorPane fx:id="anchorClavier" layoutX="32.0" layoutY="300.0" prefHeight="195.0" prefWidth="629.0">
+            <AnchorPane fx:id="anchorClavier" layoutX="32.0" layoutY="240.0" prefHeight="255.0" prefWidth="638.0">
                <children>
-                  <GridPane prefHeight="139.0" prefWidth="638.0">
+                  <GridPane layoutY="68.0" prefHeight="139.0" prefWidth="638.0">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -261,14 +261,19 @@
                         </Button>
                      </children>
                   </GridPane>
-                  <Button fx:id="buttonSup" layoutX="37.0" layoutY="127.0" mnemonicParsing="false" onAction="#SUP" style="-fx-background-color: #FFFFFF00; -fx-border-color: #f0ff48; -fx-border-radius: 40px; -fx-border-width: 3px;" text="Supp" textFill="#f0ff48">
+                  <Button fx:id="buttonSup" layoutX="37.0" layoutY="195.0" mnemonicParsing="false" onAction="#SUP" style="-fx-background-color: #FFFFFF00; -fx-border-color: #f0ff48; -fx-border-radius: 40px; -fx-border-width: 3px;" text="Supp" textFill="#f0ff48">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
-                  <Button fx:id="buttonVal" layoutX="549.0" layoutY="127.0" mnemonicParsing="false" onAction="#VAL" style="-fx-background-color: #FFFFFF00; -fx-border-color: #2ab425; -fx-border-radius: 40px; -fx-border-width: 3px;" text="Valider" textFill="#2ab425">
+                  <Button fx:id="buttonVal" layoutX="549.0" layoutY="195.0" mnemonicParsing="false" onAction="#VAL" style="-fx-background-color: #FFFFFF00; -fx-border-color: #2ab425; -fx-border-radius: 40px; -fx-border-width: 3px;" text="Valider" textFill="#2ab425">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
+                  <Label fx:id="statutLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="3.0" prefHeight="42.0" prefWidth="256.0" text="Label" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleButtonRetour" style="-fx-background-color: #FFFFFF00; -fx-padding: 2px;" text="⬅ Quitter" textFill="WHITE">
