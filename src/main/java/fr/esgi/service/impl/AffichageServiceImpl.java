@@ -151,8 +151,9 @@ public class AffichageServiceImpl implements AffichageService {
 
 	/**
 	 * Créer le bouton Split pour les parties rapides
-	 * 
-	 * @param buttonPartieRapide
+	 *
+	 * @param buttonDifficulte
+	 * @param buttonNbMot
 	 */
 	@Override
 	public void creerBoutonMenu(SplitMenuButton buttonDifficulte, SplitMenuButton buttonNbMot) {
@@ -249,6 +250,7 @@ public class AffichageServiceImpl implements AffichageService {
 		int taille = motATrouver.getLongueurMot();
 		// Supprimer toutes les colonnes existantes
 		grilleJeu.getColumnConstraints().clear();
+		grilleJeu.getChildren().clear();
 
 		// defini la taille de chaque carreau
 		for (int col = 0; col < taille; col++) {

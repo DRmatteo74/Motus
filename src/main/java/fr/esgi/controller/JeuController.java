@@ -168,8 +168,6 @@ public class JeuController implements Initializable {
 
 	private List<String> listReponse = new ArrayList<>();
 
-	List<Question> listQuestion = new ArrayList<>();
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// créer une liste de boutton
@@ -209,9 +207,9 @@ public class JeuController implements Initializable {
 			motATrouver = motService.recupererMotAleatoireParNiveau(difficulteChoisi);
 		}
 		// si nous sommes en debut de jeu, je créer un objet Partie
-		if (nbPartieRestante == 0 || nbPartieRestante == 1) {
+		if (nbPartieRestante == 1 ||nbPartieRestante == 4) {
 			Difficulte difficulte = difficulteService.recupererDifficulteParId((long) difficulteChoisi);
-			partieService.innitialiserPartie(listQuestion, difficulte, joueurService.recupererJoueur());
+			partieService.innitialiserPartie(difficulte, joueurService.recupererJoueur());
 		}
 		// aide à résoudre
 		System.out.println(motATrouver);
@@ -252,7 +250,6 @@ public class JeuController implements Initializable {
 			boolean aGagner = jeuService.verifierMot(motRentrer, motATrouver.getMot(), grilleJeu, nombreEssai);
 			// partie gagner
 			if (aGagner) {
-				statutLabel.setText("Vous avez gagné !");
 				// j'arrete le timeret je mets à jour ou créer ma parties et ma question
 				tempsFin = System.currentTimeMillis();
 				tempsTotal = (tempsFin - tempsDebut) / 1000;
@@ -261,15 +258,20 @@ public class JeuController implements Initializable {
 				partieService.changerListQuestion(partie, question);
 				// si c'est la fin de la partie
 				if (nbPartieRestante < 2) {
+					statutLabel.setText("Vous avez gagné !");
 					joueurService.ajouterPartie(joueurService.recupererJoueur(), partie);
 				} else {
 					// sinon on continue à jouer (partie multiple question)
 					nbPartieRestante = nbPartieRestante - 1;
+					statutLabel.setText("");
+					nombreEssai = 0;
+					listReponse.clear();
+					initializeData(new int[] {difficulteChoisi, nbPartieRestante}, scene);
 				}
 
 			} else {
 				// parti perdu
-				if (nombreEssai > 6) {
+				if (nombreEssai >= 5) {
 					statutLabel.setText("Vous avez perdu !");
 					// je mets à jour ou créer ma partie et ma question
 					Partie partie = partieService.recupererDernierePartie();

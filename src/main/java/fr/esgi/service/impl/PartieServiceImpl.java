@@ -14,14 +14,13 @@ public class PartieServiceImpl implements PartieService {
 
 	/**
 	 * Je créer une partie et l'ajoute à ma liste de partie
-	 * 
-	 * @param listQuestion
+	 *
 	 * @param difficulte
 	 * @param joueur
 	 */
 	@Override
-	public void innitialiserPartie(List<Question> listQuestion, Difficulte difficulte, Joueur joueur) {
-		Partie partie = new Partie(difficulte, listQuestion, joueur);
+	public void innitialiserPartie(Difficulte difficulte, Joueur joueur) {
+		Partie partie = new Partie(difficulte, joueur);
 		parties.add(partie);
 
 	}
