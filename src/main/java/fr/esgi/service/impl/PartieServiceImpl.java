@@ -32,6 +32,7 @@ public class PartieServiceImpl implements PartieService {
 	 */
 	@Override
 	public Partie recupererDernierePartie() {
+		if(parties.isEmpty()) return null;
 		return parties.get(parties.size() - 1);
 	}
 
@@ -39,17 +40,12 @@ public class PartieServiceImpl implements PartieService {
 	 * Met à jour la liste des Question de ma partie
 	 * 
 	 * @param partie
-	 * @param question
+	 * @param _question
 	 */
 	@Override
-	public void changerListQuestion(Partie partie, Question question) {
-		List<Question> listQuestion = new ArrayList<>();
-		// je récupère la, liste déjà présente
-		listQuestion = partie.getQuestions();
-		// j'ajoute ma question
-		listQuestion.add(question);
-		// je change la liste de ma partie
-		partie.setQuestions(listQuestion);
+	public void changerListQuestion(Partie partie, Question _question) {
+		Question question = _question;
+		partie.getQuestions().add(question);
 	}
 
 }

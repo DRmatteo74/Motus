@@ -4,6 +4,7 @@ import fr.esgi.business.Joueur;
 import fr.esgi.business.Partie;
 import fr.esgi.business.Question;
 import fr.esgi.service.HistoriqueService;
+import fr.esgi.service.JeuService;
 import fr.esgi.service.JoueurService;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import java.util.List;
 public class HistoriqueServiceImpl implements HistoriqueService {
 
     JoueurService joueurService = new JoueurServiceImpl();
+    JeuService jeuService = new JeuServiceImpl();
 
     @Override
     public List<Partie> recupererPartie(Joueur joueur) {
@@ -31,34 +33,29 @@ public class HistoriqueServiceImpl implements HistoriqueService {
     @Override
     public void afficherBoutonChoix(FlowPane plane, GridPane grille){
         List<Partie> parties = recupererPartie(joueurService.recupererJoueur());
-        System.out.println(joueurService.recupererJoueur().toString());
         if(parties != null){
             for (Partie partie: parties) {
                 Button button = new Button();
                 button.setText("Partie " + partie.getId().toString());
-                button.setStyle("-fx-background-color: #FFFFFF00; -fx-border-color: #FFF; -fx-border-radius: 40px; -fx-border-width: 2px;");
-                button.setOnAction(event -> {
-                    afficherGrille(grille, partie);
-                });
+                button.setStyle("-fx-background-color: #FFFFFF00; -fx-border-color: #FFF; -fx-border-radius: 40px; -fx-border-width: 2px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;");
+                button.setOnAction(event -> afficherGrille(grille, partie));
+                plane.getChildren().add(button);
             }
         }
-
     }
 
     @Override
     public void afficherGrille(GridPane grille, Partie partie) {
         List<Question> questions = recupererQuestion(partie);
-
         grille.getChildren().clear();
-
         int taille = questions.size();
         // Supprimer toutes les colonnes existantes
         grille.getColumnConstraints().clear();
 
         // defini la taille de chaque carreau
-        for (int col = 0; col < 3; col++) {
+        for (int col = 0; col < 2; col++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / taille);
+            colConst.setPercentWidth(100.0 / 2);
             grille.getColumnConstraints().add(colConst);
         }
 
@@ -66,8 +63,8 @@ public class HistoriqueServiceImpl implements HistoriqueService {
         grille.getRowConstraints().clear();
 
         grille.setVgap(10.0);
-
-        int nbLigne = (int) Math.ceil((double)(taille / 3));
+        double nbLigneF = taille / 2.0;
+        int nbLigne = (int) Math.ceil(nbLigneF);
         int questionAfficher = 0;
 
         // defini la taille de chaque carreau
@@ -77,16 +74,17 @@ public class HistoriqueServiceImpl implements HistoriqueService {
             grille.getRowConstraints().add(rowConst);
 
             // créer un tableau dans chaque carreau
-            for (int col = 0; col < 3; col++) {
-                GridPane grid = new GridPane();
-                grid.getColumnConstraints().clear();
-                grid.getRowConstraints().clear();
-                grid.setStyle("-fx-border-color: #FFFFFF; -fx-border-width: 3px; -fx-border-radius: 10px;");
-
-                afficherMots(grid, questions.get(questionAfficher));
-                questionAfficher = questionAfficher +1;
-
-                grille.add(grid, col, row);
+            for (int col = 0; col < 2; col++) {
+                if (questionAfficher < taille) {
+                    GridPane grid = new GridPane();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    grid.setMinSize(100, 100);
+                    grid.setStyle("-fx-border-color: #FFFFFF; -fx-border-width: 3px; -fx-border-radius: 10px;");
+                    grille.add(grid, col, row);
+                    afficherMots(grid, questions.get(questionAfficher));
+                    questionAfficher = questionAfficher + 1;
+                }
             }
         }
     }
@@ -107,17 +105,28 @@ public class HistoriqueServiceImpl implements HistoriqueService {
             rowConst.setPercentHeight(100.0 / 6);
             grid.getRowConstraints().add(rowConst);
 
-            String reponse = reponses.get(row);
+            String reponse = null;
+
+            if(reponses.size() > row){
+                reponse = reponses.get(row);
+            }
 
             // créer un label dans chaque carreau
             for (int col = 0; col < taille; col++) {
                 Label label = new Label();
-                label.setText(String.valueOf(reponse.charAt(col)));
+                if(reponse == null){
+                    label.setText("_");
+                }else{
+                    label.setText(String.valueOf(reponse.charAt(col)).toUpperCase());
+                }
 
                 // defini le style de mes labels
                 label.setStyle(
                         "-fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-color: #FFFFFF00; -fx-font-size: 16px; -fx-font-weight: bold; -fx-min-width: 30px; -fx-alignment: center; -fx-text-fill: white;");
                 grid.add(label, col, row);
+            }
+            if(reponses.size() > row) {
+                jeuService.verifierMot(reponse, question.getMot().getMot(), grid, row);
             }
         }
     }

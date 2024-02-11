@@ -281,6 +281,26 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
+            <Label layoutX="582.0" layoutY="27.0" text="Mot : " AnchorPane.topAnchor="26.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelNumMot" layoutX="631.0" layoutY="25.0" AnchorPane.topAnchor="26.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="642.0" layoutY="25.0" text="/" AnchorPane.topAnchor="26.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelMaxNumMot" layoutX="651.0" layoutY="26.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
   </children>
 </VBox>

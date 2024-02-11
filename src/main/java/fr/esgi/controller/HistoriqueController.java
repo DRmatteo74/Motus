@@ -28,7 +28,7 @@ public class HistoriqueController implements Initializable {
 
     @FXML
     private void handleButtonRetour() throws IOException {
-        App.setRoot("home", null);
+        App.setRoot("menu", null);
     }
 
     @Override

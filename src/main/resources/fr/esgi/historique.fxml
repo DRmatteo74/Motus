@@ -33,7 +33,7 @@
                </children>
             </Group>
             <FlowPane fx:id="planeChoixPartie" alignment="CENTER" columnHalignment="CENTER" layoutX="251.0" layoutY="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-            <Label fx:id="labelHistorique" layoutX="14.0" layoutY="182.0" prefHeight="52.0" prefWidth="323.0" text="Historique : Partie 1" textAlignment="CENTER">
+            <Label fx:id="labelHistorique" layoutX="14.0" layoutY="182.0" prefHeight="52.0" prefWidth="323.0" text="Historique : " textAlignment="CENTER">
                <font>
                   <Font name="Candara Bold" size="22.0" />
                </font>

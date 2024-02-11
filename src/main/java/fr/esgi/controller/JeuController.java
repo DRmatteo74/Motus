@@ -58,6 +58,12 @@ public class JeuController implements Initializable {
 	private Label titreJeu;
 
 	@FXML
+	private Label labelNumMot;
+
+	@FXML
+	private Label labelMaxNumMot;
+
+	@FXML
 	private AnchorPane anchorClavier;
 
 	@FXML
@@ -206,8 +212,18 @@ public class JeuController implements Initializable {
 		} else {
 			motATrouver = motService.recupererMotAleatoireParNiveau(difficulteChoisi);
 		}
+
+		// Ecris le nombre de mots et vérifie le nombre restant pour évité de créer une nouvelle partie en cas de partie longue
+		boolean createPartie = false;
+		if(labelMaxNumMot.getText().isEmpty()){
+			createPartie = true;
+			labelMaxNumMot.setText(String.valueOf(nbPartieRestante));
+		}
+
+		labelNumMot.setText(String.valueOf(Integer.parseInt(labelMaxNumMot.getText()) - nbPartieRestante +1));
+
 		// si nous sommes en debut de jeu, je créer un objet Partie
-		if (nbPartieRestante == 1 ||nbPartieRestante == 4) {
+		if ((nbPartieRestante == 1 && createPartie) ||nbPartieRestante == 4) {
 			Difficulte difficulte = difficulteService.recupererDifficulteParId((long) difficulteChoisi);
 			partieService.innitialiserPartie(difficulte, joueurService.recupererJoueur());
 		}
