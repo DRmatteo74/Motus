@@ -6,12 +6,10 @@ import fr.esgi.business.Question;
 import fr.esgi.service.HistoriqueService;
 import fr.esgi.service.JeuService;
 import fr.esgi.service.JoueurService;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 
 import java.util.List;
 
@@ -76,13 +74,26 @@ public class HistoriqueServiceImpl implements HistoriqueService {
             // créer un tableau dans chaque carreau
             for (int col = 0; col < 2; col++) {
                 if (questionAfficher < taille) {
+                    // Ajout d'une box verticale
+                    VBox vBox = new VBox();
+                    vBox.setSpacing(2);
+                    vBox.setAlignment(Pos.TOP_CENTER);
+                    grille.add(vBox, col,row);
+                    // Affichage de la grille de jeu avec les réponses données
                     GridPane grid = new GridPane();
                     grid.getColumnConstraints().clear();
                     grid.getRowConstraints().clear();
                     grid.setMinSize(100, 100);
                     grid.setStyle("-fx-border-color: #FFFFFF; -fx-border-width: 3px; -fx-border-radius: 10px;");
-                    grille.add(grid, col, row);
+                    vBox.getChildren().add(grid);
                     afficherMots(grid, questions.get(questionAfficher));
+
+                    // Affichage du temps
+                    Label temps = new Label();
+                    temps.setText("Temps : " + questions.get(questionAfficher).getTempsReponse() + "s");
+                    temps.setStyle("fx-border-color: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: center; -fx-text-fill: white;");
+                    vBox.getChildren().add(temps);
+
                     questionAfficher = questionAfficher + 1;
                 }
             }
@@ -107,6 +118,7 @@ public class HistoriqueServiceImpl implements HistoriqueService {
 
             String reponse = null;
 
+            // Vérifie s'il y a une réponse pour une ligne
             if(reponses.size() > row){
                 reponse = reponses.get(row);
             }
@@ -125,6 +137,7 @@ public class HistoriqueServiceImpl implements HistoriqueService {
                         "-fx-border-color: white; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-color: #FFFFFF00; -fx-font-size: 16px; -fx-font-weight: bold; -fx-min-width: 30px; -fx-alignment: center; -fx-text-fill: white;");
                 grid.add(label, col, row);
             }
+            // Affiche les couleurs pour chaque case
             if(reponses.size() > row) {
                 jeuService.verifierMot(reponse, question.getMot().getMot(), grid, row);
             }
