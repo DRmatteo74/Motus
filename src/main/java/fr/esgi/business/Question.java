@@ -92,7 +92,7 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", tempsReponse=" + tempsReponse + ", reponses=" + reponses + ", mot=" + mot
-				+ ", partie=" + partie + "]";
+				+  "]";
 	}
 
 }

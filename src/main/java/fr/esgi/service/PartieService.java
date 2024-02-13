@@ -11,7 +11,7 @@ import fr.esgi.business.Question;
  * Service qui concerne toutes fonctions de la class Partie
  */
 public interface PartieService {
-	void innitialiserPartie(List<Question> listQuestion, Difficulte difficulte, Joueur joueur);
+	void innitialiserPartie(Difficulte difficulte, Joueur joueur);
 
 	Partie recupererDernierePartie();
 

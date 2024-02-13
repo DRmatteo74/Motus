@@ -27,7 +27,8 @@ public class QuestionServiceImpl implements QuestionService {
 		Question question = new Question();
 		question.setMot(mot);
 		question.setPartie(partie);
-		question.setReponses(reponse);
+		List<String> nouvellesReponses = new ArrayList<>(reponse);
+		question.setReponses(nouvellesReponses);
 		question.setTempsReponse(tempsReponse);
 		importerQuestion(question);
 

@@ -151,11 +151,12 @@ public class AffichageServiceImpl implements AffichageService {
 
 	/**
 	 * Créer le bouton Split pour les parties rapides
-	 * 
-	 * @param buttonPartieRapide
+	 *
+	 * @param buttonDifficulte
+	 * @param buttonNbMot
 	 */
 	@Override
-	public void creerBoutonMenu(SplitMenuButton buttonPartieRapide) {
+	public void creerBoutonMenu(SplitMenuButton buttonDifficulte, SplitMenuButton buttonNbMot) {
 		// création des choix possible
 		MenuItem facile = new MenuItem("Niveau facile (6 lettres)");
 		MenuItem moyen = new MenuItem("Niveau moyen (7 lettres)");
@@ -163,47 +164,35 @@ public class AffichageServiceImpl implements AffichageService {
 		MenuItem aleatoire = new MenuItem("Niveau aléatoire");
 
 		// ajout des choix
-		buttonPartieRapide.getItems().addAll(facile, moyen, difficile, aleatoire);
+		buttonDifficulte.getItems().addAll(facile, moyen, difficile, aleatoire);
+
+		MenuItem unMot = new MenuItem("1 mot");
+		MenuItem quatreMot = new MenuItem("4 mots");
+		buttonNbMot.getItems().addAll(unMot, quatreMot);
 
 		// defini l'action sur le clique d'un des choix
 		// Parametre 1 : Permets à la page de jeu de savoir la difficulté (1, 2, 3, 0)
 		// Parametre 2 : Le nombre de partie (0/4) pour rapide ou longue
 
 		facile.setOnAction((e) -> {
-			int[] donneeATransmettre = { 1, 0 };
-			try {
-				App.setRoot("jeu", donneeATransmettre);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			buttonDifficulte.setText(facile.getText());
 		});
 		moyen.setOnAction((e) -> {
-			int[] donneeATransmettre = { 2, 0 };
-			try {
-				App.setRoot("jeu", donneeATransmettre);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			buttonDifficulte.setText(moyen.getText());
 		});
 		difficile.setOnAction((e) -> {
-			int[] donneeATransmettre = { 3, 0 };
-			try {
-				App.setRoot("jeu", donneeATransmettre);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			buttonDifficulte.setText(difficile.getText());
 		});
 		aleatoire.setOnAction((e) -> {
-			int[] donneeATransmettre = { 0, 0 };
-			try {
-				App.setRoot("jeu", donneeATransmettre);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			buttonDifficulte.setText(aleatoire.getText());
+		});
+
+		unMot.setOnAction((e)->{
+			buttonNbMot.setText(unMot.getText());
+		});
+
+		quatreMot.setOnAction((e)->{
+			buttonNbMot.setText(quatreMot.getText());
 		});
 	}
 
@@ -261,6 +250,7 @@ public class AffichageServiceImpl implements AffichageService {
 		int taille = motATrouver.getLongueurMot();
 		// Supprimer toutes les colonnes existantes
 		grilleJeu.getColumnConstraints().clear();
+		grilleJeu.getChildren().clear();
 
 		// defini la taille de chaque carreau
 		for (int col = 0; col < taille; col++) {

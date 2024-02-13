@@ -63,4 +63,8 @@ public class HomeController implements Initializable {
 		joueurService.creerJoueur(textfieldPseudo.getText());
 		App.setRoot("menu", null);
 	}
+
+	public void handleButtonCredit(ActionEvent event) throws IOException {
+		App.setRoot("credit", null);
+	}
 }

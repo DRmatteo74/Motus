@@ -22,7 +22,7 @@ public interface AffichageService {
 	// menu
 	void recupererInfoJoueurInterfaceMenu(Label labelPseudo);
 
-	void creerBoutonMenu(SplitMenuButton buttonPartieRapide);
+	void creerBoutonMenu(SplitMenuButton buttonDifficulte, SplitMenuButton buttonNbMot);
 
 	// page de jeu
 	void centrerItemsJeuInterface(GridPane grilleJeu, Label titreJeu, AnchorPane anchorClavier);

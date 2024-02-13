@@ -1,11 +1,13 @@
 package fr.esgi.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import fr.esgi.App;
 import fr.esgi.business.Difficulte;
 import fr.esgi.business.Mot;
 import fr.esgi.business.Partie;
@@ -34,7 +36,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class JeuController implements Initializable {
-
+	
 	private AffichageService affichageService = new AffichageServiceImpl();
 
 	private MotService motService = new MotServiceImpl();
@@ -54,6 +56,12 @@ public class JeuController implements Initializable {
 
 	@FXML
 	private Label titreJeu;
+
+	@FXML
+	private Label labelNumMot;
+
+	@FXML
+	private Label labelMaxNumMot;
 
 	@FXML
 	private AnchorPane anchorClavier;
@@ -145,6 +153,9 @@ public class JeuController implements Initializable {
 	@FXML
 	private Button[] boutons;
 
+	@FXML
+	public Label statutLabel;
+
 	private int nbPartieRestante;
 
 	private int difficulteChoisi;
@@ -163,8 +174,6 @@ public class JeuController implements Initializable {
 
 	private List<String> listReponse = new ArrayList<>();
 
-	List<Question> listQuestion = new ArrayList<>();
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// créer une liste de boutton
@@ -175,6 +184,7 @@ public class JeuController implements Initializable {
 		// j'initialise correctement mon décor
 		affichageService.centrerItemsJeuInterface(grilleJeu, titreJeu, anchorClavier);
 
+		statutLabel.setText("");
 	}
 
 	Scene scene = null;
@@ -202,10 +212,20 @@ public class JeuController implements Initializable {
 		} else {
 			motATrouver = motService.recupererMotAleatoireParNiveau(difficulteChoisi);
 		}
+
+		// Ecris le nombre de mots et vérifie le nombre restant pour évité de créer une nouvelle partie en cas de partie longue
+		boolean createPartie = false;
+		if(labelMaxNumMot.getText().isEmpty()){
+			createPartie = true;
+			labelMaxNumMot.setText(String.valueOf(nbPartieRestante));
+		}
+
+		labelNumMot.setText(String.valueOf(Integer.parseInt(labelMaxNumMot.getText()) - nbPartieRestante +1));
+
 		// si nous sommes en debut de jeu, je créer un objet Partie
-		if (nbPartieRestante == 0 || nbPartieRestante == 1) {
+		if ((nbPartieRestante == 1 && createPartie) ||nbPartieRestante == 4) {
 			Difficulte difficulte = difficulteService.recupererDifficulteParId((long) difficulteChoisi);
-			partieService.innitialiserPartie(listQuestion, difficulte, joueurService.recupererJoueur());
+			partieService.innitialiserPartie(difficulte, joueurService.recupererJoueur());
 		}
 		// aide à résoudre
 		System.out.println(motATrouver);
@@ -238,6 +258,7 @@ public class JeuController implements Initializable {
 		// je vérifie si le mot existe
 		if (motService.recupererMot(motRentrer) == null) {
 			System.out.println("Votre mot n'existe pas");
+			statutLabel.setText("Ce mot n'est pas dans la liste !");
 		} else {
 			// je l'ajoute à ma liste de réponse
 			listReponse.add(motRentrer);
@@ -253,15 +274,21 @@ public class JeuController implements Initializable {
 				partieService.changerListQuestion(partie, question);
 				// si c'est la fin de la partie
 				if (nbPartieRestante < 2) {
+					statutLabel.setText("Vous avez gagné !");
 					joueurService.ajouterPartie(joueurService.recupererJoueur(), partie);
 				} else {
 					// sinon on continue à jouer (partie multiple question)
 					nbPartieRestante = nbPartieRestante - 1;
+					statutLabel.setText("");
+					nombreEssai = 0;
+					listReponse.clear();
+					initializeData(new int[] {difficulteChoisi, nbPartieRestante}, scene);
 				}
 
 			} else {
 				// parti perdu
-				if (nombreEssai > 6) {
+				if (nombreEssai >= 5) {
+					statutLabel.setText("Vous avez perdu !");
 					// je mets à jour ou créer ma partie et ma question
 					Partie partie = partieService.recupererDernierePartie();
 					Question question = questionService.creerQuestion(null, listReponse, motATrouver, partie);
@@ -276,6 +303,11 @@ public class JeuController implements Initializable {
 				}
 			}
 		}
+	}
+
+	@FXML
+	private void handleButtonRetour(ActionEvent event) throws IOException {
+		App.setRoot("menu", null);
 	}
 
 }

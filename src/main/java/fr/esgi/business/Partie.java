@@ -84,7 +84,7 @@ public class Partie {
 	// to string
 	@Override
 	public String toString() {
-		return "Partie [id=" + id + ", difficulte=" + difficulte + ", questions=" + questions + ", joueur=" + joueur
+		return "Partie [id=" + id + ", difficulte=" + difficulte + ", questions=" + questions
 				+ "]";
 	}
 }
