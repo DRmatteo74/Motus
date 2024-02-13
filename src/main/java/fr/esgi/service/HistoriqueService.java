@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface HistoriqueService {
 
+    void changerTrie(int trie, GridPane grille);
+
     List<Partie> recupererPartie(Joueur joueur);
 
     List<Question> recupererQuestion(Partie partie);

@@ -6,17 +6,29 @@ import fr.esgi.business.Question;
 import fr.esgi.service.HistoriqueService;
 import fr.esgi.service.JeuService;
 import fr.esgi.service.JoueurService;
+import fr.esgi.util.ComparateurQuestionParMot;
+import fr.esgi.util.ComparateurQuestionParTemps;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoriqueServiceImpl implements HistoriqueService {
 
     JoueurService joueurService = new JoueurServiceImpl();
     JeuService jeuService = new JeuServiceImpl();
+    int trieActuel = 0;
+    Partie partieActuel = null;
+
+
+    @Override
+    public void changerTrie(int trie, GridPane grille){
+        trieActuel = trie;
+        afficherGrille(grille, partieActuel);
+    }
 
     @Override
     public List<Partie> recupererPartie(Joueur joueur) {
@@ -36,7 +48,10 @@ public class HistoriqueServiceImpl implements HistoriqueService {
                 Button button = new Button();
                 button.setText("Partie " + partie.getId().toString());
                 button.setStyle("-fx-background-color: #FFFFFF00; -fx-border-color: #FFF; -fx-border-radius: 40px; -fx-border-width: 2px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;");
-                button.setOnAction(event -> afficherGrille(grille, partie));
+                button.setOnAction(event -> {
+                    afficherGrille(grille, partie);
+                    partieActuel = partie;
+                });
                 plane.getChildren().add(button);
             }
         }
@@ -44,7 +59,16 @@ public class HistoriqueServiceImpl implements HistoriqueService {
 
     @Override
     public void afficherGrille(GridPane grille, Partie partie) {
+        if(partie == null) return;
+
+        // Tri de la liste question
         List<Question> questions = recupererQuestion(partie);
+        if(trieActuel == 1){
+            questions = questions.stream().sorted(new ComparateurQuestionParMot()).toList();
+        } else if (trieActuel == 2) {
+            questions = questions.stream().sorted(new ComparateurQuestionParTemps()).toList();
+        }
+
         grille.getChildren().clear();
         int taille = questions.size();
         // Supprimer toutes les colonnes existantes
