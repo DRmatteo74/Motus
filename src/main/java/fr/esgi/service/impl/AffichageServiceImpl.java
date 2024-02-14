@@ -146,7 +146,7 @@ public class AffichageServiceImpl implements AffichageService {
 	public void recupererInfoJoueurInterfaceMenu(Label labelPseudo) {
 		// recupere le joueur
 		Joueur joueur = joueurService.recupererJoueur();
-		labelPseudo.setText(joueur.getPseudo());
+		labelPseudo.setText("Joueur : " + joueur.getPseudo());
 	}
 
 	/**

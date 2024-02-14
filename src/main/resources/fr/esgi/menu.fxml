@@ -11,7 +11,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="315.0" prefWidth="519.0" style="-fx-background-color: #B4001E;" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="labelPseudo" layoutX="76.0" layoutY="29.0" prefHeight="52.0" prefWidth="159.0" text="Pseudo" textAlignment="CENTER">
+            <Label fx:id="labelPseudo" layoutX="76.0" layoutY="29.0" prefHeight="52.0" prefWidth="170.0" text="Joueur :" textAlignment="CENTER">
                <font>
                   <Font name="Candara Bold" size="44.0" />
                </font>

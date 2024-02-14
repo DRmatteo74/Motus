@@ -33,6 +33,11 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="202.0" text="CONTAUX Valentin" textAlignment="CENTER" textFill="#3e7bab">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
             <Label alignment="CENTER" prefHeight="46.0" prefWidth="202.0" text="DUVAL Vincent" textAlignment="CENTER" textFill="#3e7bcb">
                <font>
                   <Font name="System Bold" size="20.0" />

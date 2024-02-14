@@ -4,6 +4,7 @@ module fr.esgi {
 	requires org.apache.commons.csv;
 	requires javafx.base;
 	requires javafx.graphics;
+    requires java.desktop;
 
     opens fr.esgi to javafx.fxml;
     exports fr.esgi;

@@ -1,39 +1,28 @@
 package fr.esgi.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import fr.esgi.App;
 import fr.esgi.business.Difficulte;
 import fr.esgi.business.Mot;
 import fr.esgi.business.Partie;
 import fr.esgi.business.Question;
-import fr.esgi.service.AffichageService;
-import fr.esgi.service.DifficulteService;
-import fr.esgi.service.JeuService;
-import fr.esgi.service.JoueurService;
-import fr.esgi.service.MotService;
-import fr.esgi.service.PartieService;
-import fr.esgi.service.QuestionService;
-import fr.esgi.service.impl.AffichageServiceImpl;
-import fr.esgi.service.impl.DifficulteServiceImpl;
-import fr.esgi.service.impl.JeuServiceImpl;
-import fr.esgi.service.impl.JoueurServiceImpl;
-import fr.esgi.service.impl.MotServiceImpl;
-import fr.esgi.service.impl.PartieServiceImpl;
-import fr.esgi.service.impl.QuestionServiceImpl;
+import fr.esgi.service.*;
+import fr.esgi.service.impl.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javax.swing.JOptionPane;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class JeuController implements Initializable {
 	
@@ -253,12 +242,11 @@ public class JeuController implements Initializable {
 	 * @param event
 	 */
 	@FXML
-	private void VAL(ActionEvent event) {
+	private void VAL(ActionEvent event) throws IOException {
 		motRentrer = jeuService.recupererMot(grilleJeu, nombreEssai);
 		// je vérifie si le mot existe
 		if (motService.recupererMot(motRentrer) == null) {
-			System.out.println("Votre mot n'existe pas");
-			statutLabel.setText("Ce mot n'est pas dans la liste !");
+			JOptionPane.showMessageDialog(null, "Votre mot n'existe pas", "Erreur", JOptionPane.ERROR_MESSAGE);
 		} else {
 			// je l'ajoute à ma liste de réponse
 			listReponse.add(motRentrer);
@@ -274,8 +262,9 @@ public class JeuController implements Initializable {
 				partieService.changerListQuestion(partie, question);
 				// si c'est la fin de la partie
 				if (nbPartieRestante < 2) {
-					statutLabel.setText("Vous avez gagné !");
+					JOptionPane.showMessageDialog(null, "Vous avez gagné ! le mot était " + motATrouver.getMot() + " en "  + tempsTotal + " secondes", "Succes", JOptionPane.INFORMATION_MESSAGE);
 					joueurService.ajouterPartie(joueurService.recupererJoueur(), partie);
+					App.setRoot("menu", null);
 				} else {
 					// sinon on continue à jouer (partie multiple question)
 					nbPartieRestante = nbPartieRestante - 1;
