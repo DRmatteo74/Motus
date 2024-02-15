@@ -27,10 +27,6 @@ public class Joueur {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getPseudo() {
         return pseudo;
     }
@@ -62,8 +58,7 @@ public class Joueur {
         if (getClass() != obj.getClass())
             return false;
         Joueur other = (Joueur) obj;
-        return Objects.equals(id, other.id) && Objects.equals(parties, other.parties)
-                && Objects.equals(pseudo, other.pseudo);
+        return Objects.equals(id, other.id) && Objects.equals(parties, other.parties) && Objects.equals(pseudo, other.pseudo);
     }
 
     // to string

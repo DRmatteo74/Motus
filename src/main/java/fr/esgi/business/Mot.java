@@ -26,10 +26,6 @@ public class Mot {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getMot() {
 		return mot;
 	}
@@ -44,14 +40,6 @@ public class Mot {
 
 	public void setLongueurMot(int longueurMot) {
 		this.longueurMot = longueurMot;
-	}
-
-	public static Long getCompteur() {
-		return compteur;
-	}
-
-	public static void setCompteur(Long compteur) {
-		Mot.compteur = compteur;
 	}
 
 	// hash code equals

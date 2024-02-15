@@ -36,10 +36,6 @@ public class Partie {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Difficulte getDifficulte() {
 		return difficulte;
 	}

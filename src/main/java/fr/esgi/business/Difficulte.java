@@ -24,24 +24,12 @@ public class Difficulte {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getLabelDifficulte() {
 		return labelDifficulte;
 	}
 
 	public void setLabelDifficulte(String labelDifficulte) {
 		this.labelDifficulte = labelDifficulte;
-	}
-
-	public static Long getCompteur() {
-		return compteur;
-	}
-
-	public static void setCompteur(Long compteur) {
-		Difficulte.compteur = compteur;
 	}
 
 	// hashcode et equal
