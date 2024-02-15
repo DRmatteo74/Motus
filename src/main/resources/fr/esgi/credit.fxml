@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="413.0" prefWidth="443.0" style="-fx-background-color: #B4001E;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esgi.controller.CreditController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Group>
+               <children>
+                  <Region layoutX="34.0" layoutY="35.0" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: #2ab425;" />
+                  <Region layoutX="125.0" layoutY="35.0" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: #ffff00;" />
+                  <Label fx:id="labelTitre" alignment="CENTER" prefHeight="100.0" prefWidth="202.0" text="TUSMOT!" textAlignment="CENTER">
+                     <font>
+                        <Font name="Candara Bold" size="44.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="237.0" text="LETOUBLON Thomas" textAlignment="CENTER" textFill="#f0ff48">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="219.0" text="HERNANDEZ Mathis" textAlignment="CENTER" textFill="#2ab425">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="202.0" text="CONTAUX Valentin" textAlignment="CENTER" textFill="#3e7bab">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="202.0" text="DUVAL Vincent" textAlignment="CENTER" textFill="#3e7bcb">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="237.0" text="DI-RIENZO Mattéo" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#handleButtonCredit" style="-fx-background-color: #FFFFFF00; -fx-border-color: #FFF; -fx-border-radius: 40px; -fx-border-width: 2px;" text="Retour" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

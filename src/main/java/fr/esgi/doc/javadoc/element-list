@@ -1,0 +1,7 @@
+module:fr.esgi
+fr.esgi
+fr.esgi.business
+fr.esgi.controller
+fr.esgi.service
+fr.esgi.service.impl
+fr.esgi.util
