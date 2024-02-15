@@ -25,10 +25,6 @@ public class Question {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Long getTempsReponse() {
 		return tempsReponse;
 	}
@@ -59,14 +55,6 @@ public class Question {
 
 	public void setPartie(Partie partie) {
 		this.partie = partie;
-	}
-
-	public static Long getCompteur() {
-		return compteur;
-	}
-
-	public static void setCompteur(Long compteur) {
-		Question.compteur = compteur;
 	}
 
 	// hash code et equal
