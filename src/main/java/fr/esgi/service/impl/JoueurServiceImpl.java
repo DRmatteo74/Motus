@@ -36,8 +36,8 @@ public class JoueurServiceImpl implements JoueurService {
 	/**
 	 * Ajoute la liste de partie au joueur
 	 * 
-	 * @param id
-	 * @return Mot
+	 * @param joueur
+	 * @param partie
 	 */
 	@Override
 	public void ajouterPartie(Joueur joueur, Partie partie) {

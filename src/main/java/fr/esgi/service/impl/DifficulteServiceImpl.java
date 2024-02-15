@@ -9,9 +9,9 @@ public class DifficulteServiceImpl implements DifficulteService {
 
 	private static ArrayList<Difficulte> difficultes = new ArrayList<>();
 
+
 	/**
 	 * Créer les trois niveaux de difficultés et les ajoutes dans une liste
-	 * 
 	 */
 	@Override
 	public void creerDifficulte() {
@@ -25,6 +25,11 @@ public class DifficulteServiceImpl implements DifficulteService {
 
 	}
 
+	/**
+	 * Récupère l'objet difficulté par l'id
+	 * @param id
+	 * @return Difficulte
+	 */
 	@Override
 	public Difficulte recupererDifficulteParId(Long id) {
 		return difficultes.stream().filter(mot -> mot.getId().equals(id)).findFirst().orElse(null);

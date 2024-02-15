@@ -81,7 +81,7 @@ public class MotServiceImpl implements MotService {
 	/**
 	 * Recupère un mot grâce à un String
 	 * 
-	 * @param ligne
+	 * @param nom
 	 * @return Mot
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class MotServiceImpl implements MotService {
 	/**
 	 * Ajoute un mot à la liste de mot
 	 * 
-	 * @param Mot
+	 * @param mot
 	 * @return Mot
 	 */
 	@Override
@@ -125,7 +125,7 @@ public class MotServiceImpl implements MotService {
 	/**
 	 * Recupere un mot par sa taille (definit par la difficulté)
 	 * 
-	 * @param difficulté
+	 * @param difficulte
 	 * @return Mot
 	 */
 	@Override
@@ -154,7 +154,7 @@ public class MotServiceImpl implements MotService {
 	/**
 	 * Retourne la liste de tous les mots
 	 * 
-	 * @return List<Mot>
+	 * @return List de Mots
 	 */
 	@Override
 	public List<Mot> recupererMots() {

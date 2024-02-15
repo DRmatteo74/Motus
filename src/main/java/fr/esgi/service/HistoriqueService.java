@@ -8,6 +8,9 @@ import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
+/**
+ * Service permettant l'affichage et le fonctionnement de l'historique du partie
+ */
 public interface HistoriqueService {
 
     void changerTrie(int trie, GridPane grille);

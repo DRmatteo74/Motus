@@ -24,22 +24,42 @@ public class HistoriqueServiceImpl implements HistoriqueService {
     Partie partieActuel = null;
 
 
+    /**
+     * Permet de trier les questions et regénérer l'historique
+     * @param trie
+     * @param grille
+     */
     @Override
     public void changerTrie(int trie, GridPane grille){
         trieActuel = trie;
         afficherGrille(grille, partieActuel);
     }
 
+    /**
+     * Permet de récupérer les parties du joueur
+     * @param joueur
+     * @return
+     */
     @Override
     public List<Partie> recupererPartie(Joueur joueur) {
         return joueur.getParties();
     }
 
+    /**
+     * Permet de récupérer les questions à partir de la partie
+     * @param partie
+     * @return
+     */
     @Override
     public List<Question> recupererQuestion(Partie partie) {
         return partie.getQuestions();
     }
 
+    /**
+     * Affiche les boutons de sélection de partie
+     * @param plane
+     * @param grille
+     */
     @Override
     public void afficherBoutonChoix(FlowPane plane, GridPane grille){
         List<Partie> parties = recupererPartie(joueurService.recupererJoueur());
@@ -57,6 +77,11 @@ public class HistoriqueServiceImpl implements HistoriqueService {
         }
     }
 
+    /**
+     * Génère les grilles pour chaques questions d'une partie
+     * @param grille
+     * @param partie
+     */
     @Override
     public void afficherGrille(GridPane grille, Partie partie) {
         if(partie == null) return;
@@ -124,6 +149,11 @@ public class HistoriqueServiceImpl implements HistoriqueService {
         }
     }
 
+    /**
+     * Permet d'afficher les mots dans une grille
+     * @param grid
+     * @param question
+     */
     @Override
     public void afficherMots(GridPane grid, Question question){
         int taille = question.getMot().getLongueurMot();

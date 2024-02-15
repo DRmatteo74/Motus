@@ -59,7 +59,7 @@ public class QuestionServiceImpl implements QuestionService {
 	/**
 	 * Retourne la liste de questions
 	 * 
-	 * @return ArrayList<Question>
+	 * @return ArrayList de Question
 	 */
 	@Override
 	public ArrayList<Question> recupererQuestions() {
